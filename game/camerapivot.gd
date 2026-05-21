@@ -1,68 +1,146 @@
 extends Node3D
 
-@export var speed: float = 20.0        # Скорость перемещения камеры
-@export var edge_margin: float = 20.0  # Размер зоны у края экрана (в пикселях) для движения мышью
-@export var use_edge_scroll: bool = true
+@export var move_speed := 15.0
+@export var drag_sensitivity := 0.022
+@export var zoom_speed := 1.0
 
-@onready var camera: Camera3D = $Camera3D
+@export var min_zoom := 6.0
+@export var max_zoom := 30.0
 
-# Границы карты (чтобы камера не улетала в бесконечность)
-var map_limit_min: Vector2 = Vector2(-40, -40)
-var map_limit_max: Vector2 = Vector2(40, 40)
+@onready var camera: Camera3D = $IsometricCam3D
+
+# Границы карты
+var map_limit_min := Vector2(-40, -40)
+var map_limit_max := Vector2(40, 40)
+
+var dragging := false
+
 
 func _process(delta: float) -> void:
-	var direction := Vector3.ZERO
-	
-	# 1. Управление через WASD / Стрелочки
-	if Input.is_action_pressed("ui_right") or Input.is_key_pressed(KEY_D):
-		direction.x += 1
-	if Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A):
-		direction.x -= 1
-	if Input.is_action_pressed("ui_down") or Input.is_key_pressed(KEY_S):
-		direction.z += 1
-	if Input.is_action_pressed("ui_up") or Input.is_key_pressed(KEY_W):
-		direction.z -= 1
-		
-	# 2. Управление мышкой у краев экрана
-	if use_edge_scroll:
-		var viewport_size = get_viewport().get_mouse_position()
-		var window_size = get_viewport().get_visible_rect().size
-		
-		if viewport_size.x >= window_size.x - edge_margin:
-			direction.x += 1
-		elif viewport_size.x <= edge_margin:
-			direction.x -= 1
-			
-		if viewport_size.y >= window_size.y - edge_margin:
-			direction.z += 1
-		elif viewport_size.y <= edge_margin:
-			direction.z -= 1
 
-	# Нормализуем вектор, чтобы по диагонали камера не двигалась быстрее
-	if direction != Vector3.ZERO:
-		direction = direction.normalized()
-		
-	# Двигаем наш Pivot (якорь) по земле
-	global_translate(direction * speed * delta)
-	
-	# Ограничиваем перемещение камеры в пределах карты
-	global_position.x = clamp(global_position.x, map_limit_min.x, map_limit_max.x)
-	global_position.z = clamp(global_position.z, map_limit_min.y, map_limit_max.y)
+	# ===== WASD MOVEMENT =====
+
+	var input_dir := Vector2.ZERO
+
+	if Input.is_key_pressed(KEY_D):
+		input_dir.x += 1
+
+	if Input.is_key_pressed(KEY_A):
+		input_dir.x -= 1
+
+	if Input.is_key_pressed(KEY_W):
+		input_dir.y -= 1
+
+	if Input.is_key_pressed(KEY_S):
+		input_dir.y += 1
+
+	if input_dir != Vector2.ZERO:
+
+		input_dir = input_dir.normalized()
+
+		# Направления камеры
+		var cam_right = camera.global_basis.x
+		var cam_forward = camera.global_basis.z
+
+		# Убираем вертикальную составляющую
+		cam_right.y = 0
+		cam_forward.y = 0
+
+		cam_right = cam_right.normalized()
+		cam_forward = cam_forward.normalized()
+
+		# Движение относительно камеры
+		var movement = (cam_right * input_dir.x) + (cam_forward * input_dir.y)
+
+		global_position += movement * move_speed * delta
+
+	# ===== MAP LIMITS =====
+
+	global_position.x = clamp(
+		global_position.x,
+		map_limit_min.x,
+		map_limit_max.x
+	)
+
+	global_position.z = clamp(
+		global_position.z,
+		map_limit_min.y,
+		map_limit_max.y
+	)
+
 
 func _unhandled_input(event: InputEvent) -> void:
-	# 3. Приближение и отдаление (Zoom) на колесико мыши
+
+	# ===== DRAG PAN =====
+
 	if event is InputEventMouseButton:
+
+		if event.button_index == MOUSE_BUTTON_MIDDLE:
+			dragging = event.pressed
+
+		# ===== ZOOM =====
+
 		if camera.projection == Camera3D.PROJECTION_ORTHOGONAL:
-			# Для ортогональной камеры меняем параметр Size
+
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				camera.size = clamp(camera.size - 1, 10, 40)
+				camera.size = clamp(
+					camera.size - zoom_speed,
+					min_zoom,
+					max_zoom
+				)
+
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				camera.size = clamp(camera.size + 1, 10, 40)
+				camera.size = clamp(
+					camera.size + zoom_speed,
+					min_zoom,
+					max_zoom
+				)
+
 		else:
-			# Для перспективной камеры двигаем саму камеру ближе/дальше по ее локальной оси Z
+
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				camera.position.y = clamp(camera.position.y - 1, 8, 30)
-				camera.position.z = clamp(camera.position.z - 1, 8, 30)
+				camera.position.y = clamp(
+					camera.position.y - zoom_speed,
+					min_zoom,
+					max_zoom
+				)
+
+				camera.position.z = clamp(
+					camera.position.z - zoom_speed,
+					min_zoom,
+					max_zoom
+				)
+
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				camera.position.y = clamp(camera.position.y + 1, 8, 30)
-				camera.position.z = clamp(camera.position.z + 1, 8, 30)
+				camera.position.y = clamp(
+					camera.position.y + zoom_speed,
+					min_zoom,
+					max_zoom
+				)
+
+				camera.position.z = clamp(
+					camera.position.z + zoom_speed,
+					min_zoom,
+					max_zoom
+				)
+
+	# ===== CAMERA DRAG =====
+
+	if event is InputEventMouseMotion and dragging:
+
+		var delta = event.relative
+
+		var cam_right = camera.global_basis.x
+		var cam_forward = camera.global_basis.z
+
+		cam_right.y = 0
+		cam_forward.y = 0
+
+		cam_right = cam_right.normalized()
+		cam_forward = cam_forward.normalized()
+
+		var movement = (
+			(-cam_right * delta.x) +
+			(-cam_forward * delta.y))
+
+		global_position += movement * drag_sensitivity

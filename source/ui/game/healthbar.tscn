@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dlf2gtxyg4oth"]
+
+[node name="Healthbar" type="Node3D" unique_id=104868348]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=826916502]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport" unique_id=1958297815]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=317471306]

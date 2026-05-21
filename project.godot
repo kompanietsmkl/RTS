@@ -21,3 +21,4 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4

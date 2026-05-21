@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dan78l271ycrf"]
+
+[ext_resource type="Texture2D" uid="uid://bj1o2n8vslw6m" path="res://assets/models/crystals/crystal_fbx/crystallow_DefaultMaterial_Emissive.png" id="1_pmkm2"]
+
+[resource]
+albedo_texture = ExtResource("1_pmkm2")
