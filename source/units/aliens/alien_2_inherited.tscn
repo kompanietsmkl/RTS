@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bda07y5cemxxt"]
+
+[ext_resource type="PackedScene" uid="uid://donojbf20aaxo" path="res://source/units/aliens/alien_base_scene.tscn" id="1_eqwx4"]
+
+[node name="CharacterBody3D" unique_id=1837261925 instance=ExtResource("1_eqwx4")]
