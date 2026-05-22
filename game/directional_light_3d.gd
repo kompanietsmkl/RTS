@@ -4,7 +4,7 @@ extends DirectionalLight3D
 @export var day_length_minutes: float = 5.0
 
 # Текущее время суток (от 0.0 до 1.0, где 0.0 - полночь, 0.5 - полдень)
-@export_range(0.0, 1.0) var time_of_day: float = 0.25 # Стартуем утром
+@export_range(0.0, 1.0) var time_of_day: float = 0.8 # Стартуем утром
 
 # Скорость вращения солнца (вычисляется автоматически)
 var rotation_speed: float = 0.0

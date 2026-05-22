@@ -21,7 +21,7 @@ radius = 1.5581055
 height = 1.1774902
 radius = 1.703125
 
-[node name="StaticBody3D" type="StaticBody3D" unique_id=55031528]
+[node name="StaticBody3D" type="StaticBody3D" unique_id=55031528 groups=["base"]]
 
 [node name="Transforms" type="Node3D" parent="." unique_id=1324895075]
 transform = Transform3D(-0.494975, 0, 0.494975, 0, 0.7, 0, -0.494975, 0, -0.494975, 0, 0, -0.4)
