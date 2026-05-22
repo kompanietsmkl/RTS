@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://mudo7iocwaba"]
+
+[ext_resource type="Script" uid="uid://cmfo17oegmtar" path="res://source/ui/game/resourcebar.gd" id="1_b1g3s"]
+[ext_resource type="Texture2D" uid="uid://c0ccvsgkc5fni" path="res://assets/textures/resourcebar/resource-empty.png" id="1_n5inv"]
+[ext_resource type="Texture2D" uid="uid://cafy6skenhf63" path="res://assets/textures/resourcebar/resource-full.png" id="2_b1g3s"]
+[ext_resource type="FontFile" uid="uid://byf03nxaggt7c" path="res://assets/fonts/Kenney Future.ttf" id="4_x7bql"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aklm6"]
+font = ExtResource("4_x7bql")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x7bql"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Resourcebar" type="Node3D" unique_id=1577158983]
+script = ExtResource("1_b1g3s")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=769786390]
+transparent_bg = true
+size = Vector2i(200, 20)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubViewport" unique_id=1272727529]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport/Control" unique_id=40469590]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_under = ExtResource("1_n5inv")
+texture_progress = ExtResource("2_b1g3s")
+
+[node name="Label" type="Label" parent="SubViewport/Control" unique_id=1016133279]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 60.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50/50"
+label_settings = SubResource("LabelSettings_aklm6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1818111044]
+billboard = 1
+texture = SubResource("ViewportTexture_x7bql")

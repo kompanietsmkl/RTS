@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cemrq8mkgxnum"
-path="res://.godot/imported/terrain.glb-9695b3bd2c22fa1bba994980038461f2.scn"
+uid="uid://rwocv24567vi"
+path="res://.godot/imported/low_poly_rock_cave.glb-74810bcd8a4c0caac52c31a046e6ed86.scn"
 
 [deps]
 
-source_file="res://assets/models/space-kit/terrain.glb"
-dest_files=["res://.godot/imported/terrain.glb-9695b3bd2c22fa1bba994980038461f2.scn"]
+source_file="res://assets/models/alien-cave/low_poly_rock_cave.glb"
+dest_files=["res://.godot/imported/low_poly_rock_cave.glb-74810bcd8a4c0caac52c31a046e6ed86.scn"]
 
 [params]
 
@@ -37,25 +37,6 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"materials": {
-"rock": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/textures/rock.tres",
-"use_external/path": "uid://dfx1std0hbgp2"
-}
-},
-"meshes": {
-"terrain_Mesh terrain": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 20.0,
-"save_to_file/enabled": false,
-"save_to_file/fallback_path": "res://assets/mesh/terrain_Mesh terrain.res",
-"save_to_file/path": "uid://vo1qv1x78w6o"
-}
-}
-}
+_subresources={}
 gltf/naming_version=2
 gltf/embedded_image_handling=1

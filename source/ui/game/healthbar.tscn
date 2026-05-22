@@ -1,11 +1,26 @@
 [gd_scene format=3 uid="uid://dlf2gtxyg4oth"]
 
+[ext_resource type="Texture2D" uid="uid://diqkqao2oxmsf" path="res://assets/textures/healthbar/healthbar-empty.png" id="1_5lfrc"]
+[ext_resource type="Script" uid="uid://bgnhnhmaruotp" path="res://source/ui/game/healthbar.gd" id="1_ysxaa"]
+[ext_resource type="Texture2D" uid="uid://byjnl4fq865uq" path="res://assets/textures/healthbar/healthbar-full.png" id="2_ysxaa"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5lfrc"]
+viewport_path = NodePath("SubViewport")
+
 [node name="Healthbar" type="Node3D" unique_id=104868348]
+script = ExtResource("1_ysxaa")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=826916502]
+transparent_bg = true
+size = Vector2i(200, 20)
+render_target_update_mode = 4
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport" unique_id=1958297815]
 offset_right = 40.0
 offset_bottom = 40.0
+texture_under = ExtResource("1_5lfrc")
+texture_progress = ExtResource("2_ysxaa")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=317471306]
+billboard = 1
+texture = SubResource("ViewportTexture_5lfrc")

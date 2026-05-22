@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cw2rdasuvpusu" path="res://assets/models/space-kit/machine_wireless.glb" id="9_xsk2y"]
 [ext_resource type="PackedScene" uid="uid://d087w4fcd71u7" path="res://assets/models/space-kit/barrels.glb" id="10_aoaae"]
 [ext_resource type="PackedScene" uid="uid://bw4j0p1frmrhg" path="res://assets/models/space-kit/corridor_cornerRoundWindow.glb" id="11_53fvr"]
+[ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/game/healthbar.tscn" id="12_t4l0q"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f84ad"]
 height = 1.0917969
@@ -76,3 +77,6 @@ shape = SubResource("CylinderShape3D_f84ad")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=1703149778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41125488, 0)
 shape = SubResource("CylinderShape3D_t4l0q")
+
+[node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("12_t4l0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

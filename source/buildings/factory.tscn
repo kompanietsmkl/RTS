@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://0hpbcb2ji48i"]
 
+[ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/game/healthbar.tscn" id="1_qo3su"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34x46"]
 resource_name = "metal"
 albedo_color = Color(0.92759997, 0.9408054, 0.9592555, 1)
@@ -194,15 +196,30 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2kmfo")
 
-[node name="Factory" type="Node3D" unique_id=2125345631]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nvw3j"]
+points = PackedVector3Array(1.1, 0.8413665, 0.3497455, 1.1, 0, 0.3497455, 1.1, 0.8413665, -0.35003912, 0.8413665, 1.1, 0.3497455, 0.999863, 0.7999119, 1.5, 0.999863, 0, 1.5, 1.1, 0, -0.35003912, 0.999863, 0.7999119, -1.5, 0.8413665, 1.1, -0.35003912, -0.8415818, 1.1, 0.3497455, 0.79980433, 0.9999707, 1.5, -1.0000783, 0, 1.5, 0.999863, 0, -1.5, 0.79980433, 0.9999707, -1.5, -0.8415818, 1.1, -0.35003912, -1.1, 0.8413665, 0.3497455, -1.0000783, 0.7999119, 1.5, -0.8000196, 0.9999707, 1.5, -1.1, 0, 0.3497455, -1.0000783, 0, -1.5, -0.8000196, 0.9999707, -1.5, -1.1, 0.8413665, -0.35003912, -1.0000783, 0.7999119, -1.5, -1.1, 0, -0.35003912)
 
-[node name="hangar_largeB" type="MeshInstance3D" parent="." unique_id=794002925]
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1609852567]
+
+[node name="HangarMesh" type="MeshInstance3D" parent="." unique_id=1733793867]
 mesh = SubResource("ArrayMesh_nvw3j")
 
-[node name="gate" type="MeshInstance3D" parent="hangar_largeB" unique_id=621554767]
+[node name="gate" type="MeshInstance3D" parent="HangarMesh" unique_id=867013757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.674395e-09, -1.3499999)
 mesh = SubResource("ArrayMesh_qo3su")
 
-[node name="gate2" type="MeshInstance3D" parent="hangar_largeB" unique_id=1663532320]
+[node name="gate2" type="MeshInstance3D" parent="HangarMesh" unique_id=1557805864]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 9.674395e-09, 1.3499999)
 mesh = SubResource("ArrayMesh_qo3su")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1488590037]
+shape = SubResource("ConvexPolygonShape3D_nvw3j")
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=925681467]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=963010053]
+transform = Transform3D(1.055, 0, 0, 0, 1.055, 0, 0, 0, 1.055, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_nvw3j")
+
+[node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("1_qo3su")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
