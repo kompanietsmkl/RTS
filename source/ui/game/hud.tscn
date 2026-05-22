@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://btiksgpe2fl21"]
 
-[node name="Hud" type="Node3D" unique_id=476459427]
+[node name="Control" type="Control" unique_id=1468736572]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

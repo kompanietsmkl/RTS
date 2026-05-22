@@ -9,13 +9,14 @@ points = PackedVector3Array(-306.76923, 340.84122, 5.591568, -149.03223, 316.152
 [node name="StaticBody3D" type="StaticBody3D" unique_id=1582214487]
 
 [node name="low_poly_rock_cave" parent="." unique_id=2049565364 instance=ExtResource("1_4jds3")]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.25, 0, 0, 0, 0.15, 0, 0, 0)
 
 [node name="Cave__0" parent="low_poly_rock_cave" index="0" unique_id=893600496]
+transform = Transform3D(0.047499396, -0.008636253, 0.014393754, -0.008636253, 0.024469392, 0.04318125, -0.014393759, -0.043181255, 0.021590639, 0, 0, 0)
 material_override = ExtResource("2_k7pgf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=676447786]
-transform = Transform3D(0.0023749701, -0.00043181243, 0.0007196876, -0.0004318126, 0.0012234695, 0.0021590625, -0.0007196878, -0.0021590628, 0.0010795317, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="low_poly_rock_cave" unique_id=781920314]
+transform = Transform3D(0.047499396, -0.008636253, 0.014393754, -0.008636253, 0.024469392, 0.04318125, -0.014393759, -0.043181255, 0.021590639, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_k7pgf")
 
 [editable path="low_poly_rock_cave"]

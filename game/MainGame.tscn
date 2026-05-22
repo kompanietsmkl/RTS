@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b4vdcw30y561g" path="res://source/buildings/commandcenter.tscn" id="3_q5fd3"]
 [ext_resource type="MeshLibrary" uid="uid://cwbdjxw1acxd5" path="res://assets/models/meshlibs/ML1.tres" id="4_r4rta"]
 [ext_resource type="PackedScene" uid="uid://dpyqo8mdg5hr8" path="res://source/environment/crystal.tscn" id="4_u3mfo"]
-[ext_resource type="PackedScene" uid="uid://cab7vvqhnmwq5" path="res://source/environment/alien_spawner.tscn" id="5_q5fd3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rvslj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -182,18 +181,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.016719, -4.7683716e-07, -2
 
 [node name="AliensSpawner" type="Node3D" parent="NavigationRegion3D/GAME_ENTITIES" unique_id=874200292]
 
-[node name="StaticBody3D" parent="NavigationRegion3D/GAME_ENTITIES/AliensSpawner" unique_id=1582214487 instance=ExtResource("5_q5fd3")]
-transform = Transform3D(-2.9247127, 0.5353346, -3.43932, 0.39450592, 6.970972, 0.11852918, 3.4341226, -0.34488875, -2.9427547, -28.701284, 0, 28.79911)
-
-[node name="Cave__0" parent="NavigationRegion3D/GAME_ENTITIES/AliensSpawner/StaticBody3D/low_poly_rock_cave" parent_id_path=PackedInt32Array(1582214487, 2049565364) index="0" unique_id=893600496]
-transform = Transform3D(0.047499392, -0.008636253, 0.014393754, -0.008636252, 0.024469392, 0.04318125, -0.014393757, -0.043181255, 0.021590639, 0, 0, 0)
-
-[node name="StaticBody3D2" parent="NavigationRegion3D/GAME_ENTITIES/AliensSpawner" unique_id=893153301 instance=ExtResource("5_q5fd3")]
-transform = Transform3D(-0.34226617, -0.08977008, 3.347045, 0.29317868, 5.183417, 0.088085435, -3.3346853, 0.464929, -0.33579051, 26.659119, 0, -29.922834)
-
-[node name="Cave__0" parent="NavigationRegion3D/GAME_ENTITIES/AliensSpawner/StaticBody3D2/low_poly_rock_cave" parent_id_path=PackedInt32Array(893153301, 2049565364) index="0" unique_id=893600496]
-transform = Transform3D(0.047499392, -0.008636253, 0.014393754, -0.008636252, 0.024469392, 0.04318125, -0.014393757, -0.043181255, 0.021590639, 0, 0, 0)
-
 [node name="ENVIRONMENT" type="Node3D" parent="NavigationRegion3D" unique_id=750265085]
 
 [node name="Tilemap" type="GridMap" parent="NavigationRegion3D/ENVIRONMENT" unique_id=1372244905]
@@ -258,7 +245,3 @@ mesh = SubResource("ArrayMesh_0bbpv")
 [editable path="NavigationRegion3D/GAME_ENTITIES/CrystalsContainer/CrystalB6"]
 [editable path="NavigationRegion3D/GAME_ENTITIES/CrystalsContainer/CrystalB7"]
 [editable path="NavigationRegion3D/GAME_ENTITIES/CrystalsContainer/CrystalB8"]
-[editable path="NavigationRegion3D/GAME_ENTITIES/AliensSpawner/StaticBody3D"]
-[editable path="NavigationRegion3D/GAME_ENTITIES/AliensSpawner/StaticBody3D/low_poly_rock_cave"]
-[editable path="NavigationRegion3D/GAME_ENTITIES/AliensSpawner/StaticBody3D2"]
-[editable path="NavigationRegion3D/GAME_ENTITIES/AliensSpawner/StaticBody3D2/low_poly_rock_cave"]
