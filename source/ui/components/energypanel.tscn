@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://ciqkgqi8n5hru"]
+
+[ext_resource type="Script" uid="uid://brcfujkuum1io" path="res://source/ui/components/energypanel.gd" id="1_pglqc"]
+[ext_resource type="Texture2D" uid="uid://du0t7r60vta5b" path="res://assets/textures/ui-pack/panel_rectangle.png" id="2_e3qi0"]
+[ext_resource type="FontFile" uid="uid://ddbkqmwtxg65k" path="res://assets/fonts/Kenney Future Narrow.ttf" id="3_2agbn"]
+[ext_resource type="LabelSettings" uid="uid://ct8o5uscpkpj2" path="res://assets/fonts/label_settings_future.tres" id="4_lqfu6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e3qi0"]
+font = ExtResource("3_2agbn")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_lqfu6"]
+font = ExtResource("3_2agbn")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_lumq2"]
+font = ExtResource("3_2agbn")
+
+[node name="EnergyPanel" type="Control" unique_id=1135170803]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pglqc")
+
+[node name="Box" type="NinePatchRect" parent="." unique_id=1711242726]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 92.0
+texture = ExtResource("2_e3qi0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Box" unique_id=1273574252]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5
+offset_top = -39.0
+offset_right = 78.5
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=1527761917]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Box/VBoxContainer/Header" unique_id=1251075457]
+layout_mode = 2
+text = "ENERGY:"
+label_settings = SubResource("LabelSettings_e3qi0")
+
+[node name="EnergyLabel" type="Label" parent="Box/VBoxContainer/Header" unique_id=1435535177]
+layout_mode = 2
+text = "5/5"
+label_settings = SubResource("LabelSettings_lqfu6")
+
+[node name="Spacer" type="Control" parent="Box/VBoxContainer" unique_id=1075989723]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="DefendRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=1290730499]
+layout_mode = 2
+
+[node name="DefendTitle" type="Label" parent="Box/VBoxContainer/DefendRow" unique_id=1370810727]
+layout_mode = 2
+text = "Defend:"
+label_settings = ExtResource("4_lqfu6")
+
+[node name="DefendValue" type="Label" parent="Box/VBoxContainer/DefendRow" unique_id=1130077879]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_lqfu6")
+
+[node name="DefendSlider" type="HSlider" parent="Box/VBoxContainer/DefendRow" unique_id=1993131566]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GatherRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=807806922]
+layout_mode = 2
+
+[node name="GatherTitle" type="Label" parent="Box/VBoxContainer/GatherRow" unique_id=1230519127]
+layout_mode = 2
+text = "Gather:"
+label_settings = SubResource("LabelSettings_lumq2")
+
+[node name="GatherValue" type="Label" parent="Box/VBoxContainer/GatherRow" unique_id=236617404]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_lqfu6")
+
+[node name="GatherSlider" type="HSlider" parent="Box/VBoxContainer/GatherRow" unique_id=1371882708]
+layout_mode = 2
+size_flags_horizontal = 3

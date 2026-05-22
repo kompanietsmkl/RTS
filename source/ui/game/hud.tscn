@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://btiksgpe2fl21"]
 
-[node name="Control" type="Control" unique_id=1468736572]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="PackedScene" uid="uid://ciqkgqi8n5hru" path="res://source/ui/components/energypanel.tscn" id="1_5v2im"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1284809205]
+
+[node name="EnergyPanel" parent="." unique_id=1135170803 instance=ExtResource("1_5v2im")]
+offset_top = 25.0
+offset_right = -982.0
+offset_bottom = -538.0
