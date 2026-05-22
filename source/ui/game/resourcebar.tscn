@@ -6,7 +6,9 @@
 [ext_resource type="FontFile" uid="uid://byf03nxaggt7c" path="res://assets/fonts/Kenney Future.ttf" id="4_x7bql"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aklm6"]
+line_spacing = 0.0
 font = ExtResource("4_x7bql")
+font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x7bql"]

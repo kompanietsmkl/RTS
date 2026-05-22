@@ -15,6 +15,14 @@ func move_to_target(target_pos: Vector3, delta: float):
 		var next_path_position = navigation_agent.get_next_path_position()
 		var new_velocity = global_position.direction_to(next_path_position) * speed
 		velocity = new_velocity
+		
+		# Плавный поворот в сторону движения (игнорируем высоту Y, чтобы дрон не кивал носом)
+		var flat_target = Vector3(next_path_position.x, global_position.y, next_path_position.z)
+		if global_position.distance_to(flat_target) > 0.1:
+			var target_transform = transform.looking_at(flat_target, Vector3.UP)
+			# interpolate_with делает поворот плавным (10.0 - скорость поворота)
+			transform = transform.interpolate_with(target_transform, 10.0 * delta)
+			
 		move_and_slide()
 
 # Общая функция получения урона
@@ -34,3 +42,4 @@ func _process(delta: float) -> void:
 func execute_behavior(delta: float):
 	# В базовом классе она пустая. Каждый дрон сам решит, что тут делать.
 	pass
+	
