@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mudo7iocwaba"]
 
-[ext_resource type="Script" uid="uid://cmfo17oegmtar" path="res://source/ui/game/resourcebar.gd" id="1_b1g3s"]
+[ext_resource type="Script" uid="uid://cmfo17oegmtar" path="res://source/ui/components/resourcebar.gd" id="1_b1g3s"]
 [ext_resource type="Texture2D" uid="uid://c0ccvsgkc5fni" path="res://assets/textures/resourcebar/resource-empty.png" id="1_n5inv"]
 [ext_resource type="Texture2D" uid="uid://cafy6skenhf63" path="res://assets/textures/resourcebar/resource-full.png" id="2_b1g3s"]
 [ext_resource type="FontFile" uid="uid://byf03nxaggt7c" path="res://assets/fonts/Kenney Future.ttf" id="4_x7bql"]

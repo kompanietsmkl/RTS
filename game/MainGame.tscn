@@ -8,6 +8,8 @@
 [ext_resource type="MeshLibrary" uid="uid://cwbdjxw1acxd5" path="res://assets/models/meshlibs/ML1.tres" id="4_r4rta"]
 [ext_resource type="PackedScene" uid="uid://dpyqo8mdg5hr8" path="res://source/environment/crystal.tscn" id="4_u3mfo"]
 [ext_resource type="PackedScene" uid="uid://btiksgpe2fl21" path="res://source/ui/game/hud.tscn" id="7_r4rta"]
+[ext_resource type="PackedScene" uid="uid://dfqwwpbv24vxg" path="res://source/environment/hill.tscn" id="8_aeyhu"]
+[ext_resource type="PackedScene" uid="uid://b7pinudnewcnd" path="res://source/ui/game/factoryprod.tscn" id="10_x16wb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rvslj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,6 +29,9 @@ glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_r4rta"]
 geometry_parsed_geometry_type = 0
+cell_size = 0.1
+cell_height = 0.1
+edge_max_length = 2.0
 
 [sub_resource type="GDScript" id="GDScript_rvslj"]
 script/source = "@tool # Этот флаг заставляет скрипт работать прямо в редакторе!
@@ -143,10 +148,10 @@ projection = 1
 size = 10.0
 
 [node name="Drone1" parent="." unique_id=1771977173 instance=ExtResource("3_agtre")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.604688, 0, 9.1217165)
+transform = Transform3D(-0.99996114, 0, 0.008813895, 0, 1, 0, -0.008813895, 0, -0.99996114, 3.3582227, 0, 4.555819)
 
 [node name="Drone2" parent="." unique_id=2111980435 instance=ExtResource("3_agtre")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3518047, -4.7683716e-07, 7.25405)
+transform = Transform3D(-0.99996114, 0, 0.008813895, 0, 1, 0, -0.008813895, 0, -0.99996114, -0.9109566, -4.7683716e-07, 6.3859286)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=312672049]
 navigation_mesh = SubResource("NavigationMesh_r4rta")
@@ -154,16 +159,7 @@ navigation_mesh = SubResource("NavigationMesh_r4rta")
 [node name="GAME_ENTITIES" type="Node3D" parent="NavigationRegion3D" unique_id=1871594434]
 
 [node name="Factory" parent="NavigationRegion3D/GAME_ENTITIES" unique_id=878220546 instance=ExtResource("4_agtre")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -3.5)
-
-[node name="FactoryLVL1" parent="NavigationRegion3D/GAME_ENTITIES/Factory" index="0" unique_id=1684744887]
-visible = true
-
-[node name="FactoryLVL2" parent="NavigationRegion3D/GAME_ENTITIES/Factory" index="1" unique_id=1063786187]
-visible = true
-
-[node name="FactoryLVL3" parent="NavigationRegion3D/GAME_ENTITIES/Factory" index="2" unique_id=1898825157]
-visible = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
 
 [node name="CommandBase" parent="NavigationRegion3D/GAME_ENTITIES" unique_id=1963761738 instance=ExtResource("3_q5fd3")]
 transform = Transform3D(-1.0928253, 0, -1.0274887, 0, 1.5, 0, 1.0274887, 0, -1.0928253, -0.12746525, 0, -0.0019569397)
@@ -250,9 +246,14 @@ mesh = SubResource("ArrayMesh_0bbpv")
 transform = Transform3D(2.376098, 0, -4.0156827, 0, 6.9999995, 0, 4.0156827, 0, 2.376098, 11.060017, 0, -12.417389)
 mesh = SubResource("ArrayMesh_0bbpv")
 
+[node name="Hill" parent="NavigationRegion3D/ENVIRONMENT" unique_id=436470346 instance=ExtResource("8_aeyhu")]
+transform = Transform3D(-2, 0, 1.7484555e-07, 0, 2, 0, -1.7484555e-07, 0, -2, -7.9693494, 0, -2.6106925)
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=1720247258]
 
 [node name="CanvasLayer" parent="UI" unique_id=1284809205 instance=ExtResource("7_r4rta")]
+
+[node name="CanvasLayer2" parent="UI" unique_id=2091652824 instance=ExtResource("10_x16wb")]
 
 [editable path="NavigationRegion3D/GAME_ENTITIES/Factory"]
 [editable path="NavigationRegion3D/GAME_ENTITIES/CommandBase"]

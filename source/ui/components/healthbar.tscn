@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlf2gtxyg4oth"]
 
 [ext_resource type="Texture2D" uid="uid://diqkqao2oxmsf" path="res://assets/textures/healthbar/healthbar-empty.png" id="1_5lfrc"]
-[ext_resource type="Script" uid="uid://bgnhnhmaruotp" path="res://source/ui/game/healthbar.gd" id="1_ysxaa"]
+[ext_resource type="Script" uid="uid://bgnhnhmaruotp" path="res://source/ui/components/healthbar.gd" id="1_ysxaa"]
 [ext_resource type="Texture2D" uid="uid://byjnl4fq865uq" path="res://assets/textures/healthbar/healthbar-full.png" id="2_ysxaa"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5lfrc"]

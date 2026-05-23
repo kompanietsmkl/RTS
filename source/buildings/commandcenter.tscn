@@ -11,15 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cw2rdasuvpusu" path="res://assets/models/space-kit/machine_wireless.glb" id="9_xsk2y"]
 [ext_resource type="PackedScene" uid="uid://d087w4fcd71u7" path="res://assets/models/space-kit/barrels.glb" id="10_aoaae"]
 [ext_resource type="PackedScene" uid="uid://bw4j0p1frmrhg" path="res://assets/models/space-kit/corridor_cornerRoundWindow.glb" id="11_53fvr"]
-[ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/game/healthbar.tscn" id="12_t4l0q"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_f84ad"]
-height = 1.0917969
-radius = 1.5581055
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_t4l0q"]
-height = 1.1774902
-radius = 1.703125
+[ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/components/healthbar.tscn" id="12_t4l0q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kvhx"]
 resource_name = "metal"
@@ -167,7 +159,19 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_5c718")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f84ad"]
+height = 1.0917969
+radius = 1.5581055
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t4l0q"]
+height = 1.1774902
+radius = 1.703125
+
 [node name="Node3D" type="Node3D" unique_id=1201122375 groups=["base"]]
+
+[node name="satelliteDish" type="MeshInstance3D" parent="." unique_id=41617872]
+transform = Transform3D(0.82119906, 0, -0.5706419, 0, 1, 0, 0.5706419, 0, 0.82119906, 1.588746, 2.3841858e-07, -0.6906067)
+mesh = SubResource("ArrayMesh_t4l0q")
 
 [node name="BaseLVL1" type="StaticBody3D" parent="." unique_id=100873696]
 
@@ -228,7 +232,3 @@ shape = SubResource("CylinderShape3D_t4l0q")
 
 [node name="Healthbar" parent="BaseLVL1" unique_id=104868348 instance=ExtResource("12_t4l0q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="satelliteDish" type="MeshInstance3D" parent="BaseLVL1" unique_id=41617872]
-transform = Transform3D(0.947255, 0, 0.32048076, 0, 1, 0, -0.32048076, 0, 0.947255, 2.30229, 2.3841858e-07, -0.644235)
-mesh = SubResource("ArrayMesh_t4l0q")

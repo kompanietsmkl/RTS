@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dqce3sxocjfy5"]
 
 [ext_resource type="Script" uid="uid://caxkcrks3glep" path="res://source/units/drones/drone_gatherer.gd" id="1_gifhn"]
-[ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/game/healthbar.tscn" id="1_ydl72"]
+[ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/components/healthbar.tscn" id="1_ydl72"]
 [ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlight_ring.tscn" id="3_l6ifc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rkor"]
@@ -133,6 +133,7 @@ height = 0.65
 radius = 0.4
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1771977173]
+collision_mask = 3
 script = ExtResource("1_gifhn")
 
 [node name="craft_miner" type="MeshInstance3D" parent="." unique_id=944803225]

@@ -1,7 +1,9 @@
 extends StaticBody3D
+var rng = RandomNumberGenerator.new()
 
 @export var max_resources: float = 50.0
 var current_resources: float = max_resources
+var occupied_by_drone: Node = null
 
 # Ссылка на наш новый кастомный бар
 @onready var resource_bar = $Resourcebar
@@ -12,7 +14,7 @@ func _ready() -> void:
 
 
 # Эту функцию будет вызывать дрон-сборщик, когда бурит кристалл
-func harvest(amount: float):
+func harvest(amount: float) -> float:
 	# Защита, чтобы нельзя было уйти в минус, если у кристалла осталось мало ресурсов
 	var actual_amount = min(amount, current_resources)
 	current_resources -= actual_amount
@@ -20,9 +22,12 @@ func harvest(amount: float):
 	# Обновляем полоску прогресса и текст
 	resource_bar.update_resource(current_resources)
 	
-	if current_resources <= 0:
+	# Используем небольшой эпсилон для защиты от погрешностей float
+	if current_resources <= 0.01:
+		current_resources = 0
 		deplete_and_respawn()
-
+		
+	return actual_amount
 
 func deplete_and_respawn():
 	# Принудительно прячем бар, так как ресурс иссяк
@@ -33,7 +38,7 @@ func deplete_and_respawn():
 	remove_from_group("crystals") # Прячем кристалл от радаров дронов!
 	
 	# Запускаем встроенный таймер респавна (sleep time)
-	await get_tree().create_timer(30.0).timeout # Ждем 30 секунд
+	await get_tree().create_timer(rng.randi_range(30.0, 75.0)).timeout # Ждем 30-75 секунд
 	
 	# Возвращаем кристалл к жизни
 	current_resources = max_resources
