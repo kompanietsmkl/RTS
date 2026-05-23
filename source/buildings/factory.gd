@@ -4,35 +4,30 @@ extends Node3D
 var is_built: bool = false
 var current_level: int = 0
 
-const GathererScene = preload("res://source/units/drones/drone_gatherer.tscn")
-const DefenderScene = preload("res://source/units/drones/drone_defender.tscn")
 
-func spawn_drone(type: String):
-	var drone_scene: PackedScene = null
-	if type == "gatherer":
-		drone_scene = GathererScene
-	elif type == "defender":
-		drone_scene = DefenderScene
-		
-	if not drone_scene:
-		print("Неизвестный тип дрона:", type)
+
+func spawn_drone(unit_data: UnitData):
+	if not unit_data or not unit_data.unit_scene:
+		print("Ошибка спавна: не передан UnitData или отсутствует unit_scene")
 		return
 		
-	var drone_instance = drone_scene.instantiate()
+	var drone_instance = unit_data.unit_scene.instantiate()
 	
-	# Генерируем случайную позицию в радиусе 5-10 метров
-	var angle = randf() * TAU
-	var dist = randf_range(5.0, 10.0)
-	var random_offset = Vector3(cos(angle), 0, sin(angle)) * dist
-	var target_pos = global_position + random_offset
+	# Устанавливаем фиксированную точку спавна (условно "перед дверью" фабрики)
+	# Учитываем текущий поворот фабрики
+	var spawn_offset = Vector3(0, 0.5, 5.0) # 5 метров вперед по локальной оси Z, немного приподнято
+	var base_spawn_pos = global_transform * spawn_offset
 	
-	# Безопасная точка на NavMesh
-	var safe_pos = NavigationServer3D.map_get_closest_point(get_world_3d().navigation_map, target_pos)
+	# Добавляем небольшой случайный разброс, чтобы дроны не появлялись друг в друге
+	var random_x = randf_range(-2.0, 2.0)
+	var random_z = randf_range(-2.0, 2.0)
+	var spawn_pos = base_spawn_pos + Vector3(random_x, 0, random_z)
 	
-	# Спавним в корне сцены (сначала добавляем в дерево, потом ставим глобальные координаты)
+	# Спавним в корне сцены
 	get_tree().current_scene.add_child(drone_instance)
-	drone_instance.global_position = safe_pos
-	print("Фабрика: Дрон ", type, " заспавнен!")
+	drone_instance.global_position = spawn_pos
+
+	print("Фабрика: Дрон ", unit_data.display_name, " заспавнен!")
 
 
 
@@ -99,6 +94,13 @@ func bake_navmesh():
 	else:
 		print("ВНИМАНИЕ: Не удалось найти NavigationRegion3D для запекания!")
 
+
+func get_upgrade_cost() -> int:
+	if current_level == 1:
+		return 200
+	elif current_level == 2:
+		return 350
+	return -1
 
 func upgrade_factory():
 	if current_level == 1:

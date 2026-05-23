@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://caxkcrks3glep" path="res://source/units/drones/drone_gatherer.gd" id="1_gifhn"]
 [ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/components/healthbar.tscn" id="1_ydl72"]
-[ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlight_ring.tscn" id="3_l6ifc"]
+[ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlightring.tscn" id="3_l6ifc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rkor"]
 resource_name = "dark"
@@ -152,3 +152,6 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.49609375, 0)
 shape = SubResource("CylinderShape3D_ydl72")
 
 [node name="HighlightRing" parent="." unique_id=102306017 instance=ExtResource("3_l6ifc")]
+visible = false
+
+[editable path="HighlightRing"]

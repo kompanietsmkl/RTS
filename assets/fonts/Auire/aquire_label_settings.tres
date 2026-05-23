@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d0rx8mqh45rrs"]
+
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="1_2uo1u"]
+
+[resource]
+font = ExtResource("1_2uo1u")
+font_size = 21

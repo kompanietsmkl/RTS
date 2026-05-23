@@ -2,8 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://ciqkgqi8n5hru" path="res://source/ui/components/energypanel.tscn" id="1_5v2im"]
 [ext_resource type="PackedScene" uid="uid://dx1udnkofgeau" path="res://source/ui/components/credits.tscn" id="2_1nkv2"]
+[ext_resource type="PackedScene" uid="uid://dsmiomcnwygsv" path="res://source/ui/components/drones.tscn" id="3_jisra"]
+[ext_resource type="Script" path="res://source/ui/game/hud.gd" id="1_hud_script"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1284809205]
+script = ExtResource("1_hud_script")
+metadata/_edit_horizontal_guides_ = [15.0]
 
 [node name="EnergyPanel" parent="." unique_id=1135170803 instance=ExtResource("1_5v2im")]
 offset_left = 15.0
@@ -16,3 +20,30 @@ offset_left = 15.0
 offset_top = 15.0
 offset_right = -936.0
 offset_bottom = -603.4
+
+[node name="Drones" parent="." unique_id=1489167520 instance=ExtResource("3_jisra")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -88.0
+offset_top = 10.0
+offset_right = 88.0
+offset_bottom = 90.0
+grow_vertical = 1
+pivot_offset = Vector2(78, 40)
+
+[node name="ProductionQueue" type="HBoxContainer" parent="." unique_id=999999999]
+layout_direction = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1150.0
+offset_top = -150.0
+offset_right = -15.0
+offset_bottom = -110.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 0

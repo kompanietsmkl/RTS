@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://kj20nxy87hca"]
+
+[ext_resource type="Script" uid="uid://bx4d2urvqt3d" path="res://source/ui/components/productionqueueelement.gd" id="1_8q01j"]
+[ext_resource type="Texture2D" uid="uid://cq5npiccctg4m" path="res://assets/icons/defender.png" id="2_wqgg0"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="3_wqgg0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ar725"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b38vy"]
+font = ExtResource("3_wqgg0")
+font_size = 12
+
+[node name="ProductionQueueElement" type="Button" unique_id=1164997620]
+custom_minimum_size = Vector2(48, 48)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ar725")
+script = ExtResource("1_8q01j")
+
+[node name="ItemIcon" type="TextureRect" parent="." unique_id=914554947]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wqgg0")
+expand_mode = 2
+
+[node name="Status" type="Label" parent="." unique_id=1822889512]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "10%"
+label_settings = SubResource("LabelSettings_b38vy")
+horizontal_alignment = 2
+vertical_alignment = 2

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=4 format=3 uid="uid://cx628qwpyzl1y"]
+
+[ext_resource type="Script" uid="uid://unit_data_script" path="res://source/resources/unit_data.gd" id="1_unit"]
+[ext_resource type="Texture2D" uid="uid://icon_defender" path="res://assets/icons/defender.png" id="2_icon"]
+[ext_resource type="PackedScene" uid="uid://scene_defender" path="res://source/units/drones/drone_defender.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_unit")
+unit_id = "defender"
+display_name = "Защитник"
+cost = 150
+build_time = 30.0
+icon = ExtResource("2_icon")
+unit_scene = ExtResource("3_scene")

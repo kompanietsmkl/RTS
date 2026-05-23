@@ -52,10 +52,35 @@ func take_damage(amount: float):
 func die():
 	queue_free()
 
+var time_passed: float = 0.0
+var base_y: float = 0.0
+var is_idle: bool = false
+
 # --- А ТЕПЕРЬ МАГИЯ FSM ---
 # Базовая функция работы ИИ, которую мы переопределим у детей
 func _process(delta: float) -> void:
+	# Если мы хотим, чтобы дрон плавно останавливался при отсутствии команд
+	if velocity.length() > 0:
+		velocity = velocity.move_toward(Vector3.ZERO, speed * delta * 2.0)
+		move_and_slide()
+		
 	execute_behavior(delta)
+	
+	# Левитация при простое
+	if velocity.length() < 0.1:
+		if not is_idle:
+			is_idle = true
+			base_y = position.y
+			time_passed = 0.0
+			
+		time_passed += delta
+		if time_passed > 0.2:
+			var levitation = sin((time_passed - 0.2) * 1.5) * 0.1
+			position.y = base_y + levitation
+	else:
+		if is_idle:
+			is_idle = false
+			position.y = base_y
 
 func execute_behavior(delta: float):
 	# В базовом классе она пустая. Каждый дрон сам решит, что тут делать.

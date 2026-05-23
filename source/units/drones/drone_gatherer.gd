@@ -22,6 +22,12 @@ var unload_timer: float = 0.0
 
 @export var interact_range := 2.0
 
+func _enter_tree() -> void:
+	GameManager.total_gatherers += 1
+
+func _exit_tree() -> void:
+	GameManager.total_gatherers -= 1
+
 func _ready():
 	GameManager.energy_distribution_changed.connect(_on_energy_changed)
 	

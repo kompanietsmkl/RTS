@@ -3,6 +3,12 @@ extends DroneBase # Тоже получает все базовые функци
 @export var attack_range := 8.0
 @export var damage := 15.0
 
+func _enter_tree() -> void:
+	GameManager.total_defenders += 1
+
+func _exit_tree() -> void:
+	GameManager.total_defenders -= 1
+
 # У защитника поведение совершенно другое
 func execute_behavior(delta: float):
 	var enemy = find_nearest_enemy()

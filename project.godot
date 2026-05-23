@@ -20,7 +20,7 @@ GameManager="*res://core/game_manager.gd"
 
 [display]
 
-mouse_cursor/custom_image="uid://dkuq02u56o8qb"
+mouse_cursor/custom_image="uid://dyw62e36t5pwf"
 
 [navigation]
 

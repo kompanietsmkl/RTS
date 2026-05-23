@@ -35,7 +35,7 @@ func _update_ui():
 	var available = GameManager.get_available_energy()
 	var max_e = GameManager.max_energy
 	
-	energy_label.text = "%d / %d" % [available, max_e]
+	energy_label.text = "%d/%d" % [available, max_e]
 	label_gather.text = str(GameManager.energy_gathering)
 	label_defend.text = str(GameManager.energy_defense)
 	label_prod.text = str(GameManager.energy_production)

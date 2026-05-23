@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://dsmiomcnwygsv"]
+
+[ext_resource type="Script" uid="uid://clbfvsr3ldvat" path="res://source/ui/components/drones.gd" id="1_kpc2u"]
+[ext_resource type="Texture2D" uid="uid://b8ui4try6cbdh" path="res://assets/icons/ui/hud/gatherer.png" id="2_j78qi"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="4_0xeon"]
+[ext_resource type="Texture2D" uid="uid://b605bq4od27dx" path="res://assets/icons/ui/hud/defender.png" id="4_idefl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kasiw"]
+bg_color = Color(0.23137255, 0.23137255, 0.23137255, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.53333336, 0.53333336, 0.53333336, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_x1iu4"]
+font = ExtResource("4_0xeon")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_j78qi"]
+font = ExtResource("4_0xeon")
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xeon"]
+font = ExtResource("4_0xeon")
+font_size = 14
+
+[node name="Drones" type="Control" unique_id=1489167520]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kpc2u")
+metadata/_edit_horizontal_guides_ = [80.0]
+
+[node name="DroneSet" type="HBoxContainer" parent="." unique_id=901005953]
+layout_mode = 0
+offset_right = 176.0
+offset_bottom = 80.0
+
+[node name="Gatherer" type="TextureRect" parent="DroneSet" unique_id=1333523901]
+layout_mode = 2
+texture = ExtResource("2_j78qi")
+expand_mode = 2
+
+[node name="Panel" type="Panel" parent="DroneSet/Gatherer" unique_id=1806817849]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 47.0
+offset_right = 86.0
+offset_bottom = 72.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kasiw")
+
+[node name="CountLabel" type="Label" parent="DroneSet/Gatherer/Panel" unique_id=957441851]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 7.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+label_settings = SubResource("LabelSettings_x1iu4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DroneSet/Gatherer" unique_id=1519286831]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = 3.0
+offset_right = 36.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(40, 7)
+text = "Gatherer"
+label_settings = SubResource("LabelSettings_j78qi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="DroneSet" unique_id=1525462969]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="Defender" type="TextureRect" parent="DroneSet" unique_id=193185488]
+layout_mode = 2
+texture = ExtResource("4_idefl")
+expand_mode = 2
+
+[node name="Panel" type="Panel" parent="DroneSet/Defender" unique_id=1100493601]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 47.0
+offset_right = 86.0
+offset_bottom = 72.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kasiw")
+
+[node name="CountLabel" type="Label" parent="DroneSet/Defender/Panel" unique_id=147952969]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 7.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+label_settings = SubResource("LabelSettings_x1iu4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="DroneSet/Defender" unique_id=1885192748]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = 3.0
+offset_right = 36.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(40, 7)
+text = "defender"
+label_settings = SubResource("LabelSettings_0xeon")
+horizontal_alignment = 2
+vertical_alignment = 1
