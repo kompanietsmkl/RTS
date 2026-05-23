@@ -12,6 +12,7 @@ font_size = 20
 [sub_resource type="LabelSettings" id="LabelSettings_lqfu6"]
 font = ExtResource("3_2agbn")
 font_size = 20
+font_color = Color(0, 0.9490196, 0.3529412, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lumq2"]
 font = ExtResource("3_2agbn")
@@ -27,8 +28,8 @@ script = ExtResource("1_pglqc")
 
 [node name="Box" type="NinePatchRect" parent="." unique_id=1711242726]
 layout_mode = 0
-offset_right = 180.0
-offset_bottom = 92.0
+offset_right = 200.0
+offset_bottom = 105.0
 texture = ExtResource("2_e3qi0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Box" unique_id=1273574252]
@@ -38,10 +39,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -78.5
-offset_top = -39.0
-offset_right = 78.5
-offset_bottom = 39.0
+offset_left = -85.0
+offset_top = -46.5
+offset_right = 85.0
+offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -59,7 +60,6 @@ text = "5/5"
 label_settings = SubResource("LabelSettings_lqfu6")
 
 [node name="Spacer" type="Control" parent="Box/VBoxContainer" unique_id=1075989723]
-custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
 [node name="DefendRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=1290730499]
@@ -93,5 +93,22 @@ text = "0"
 label_settings = ExtResource("4_lqfu6")
 
 [node name="GatherSlider" type="HSlider" parent="Box/VBoxContainer/GatherRow" unique_id=1371882708]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProductionRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=242067831]
+layout_mode = 2
+
+[node name="ProductionTitle" type="Label" parent="Box/VBoxContainer/ProductionRow" unique_id=448607630]
+layout_mode = 2
+text = "Product:"
+label_settings = SubResource("LabelSettings_lumq2")
+
+[node name="ProductionValue" type="Label" parent="Box/VBoxContainer/ProductionRow" unique_id=2009971968]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_lqfu6")
+
+[node name="ProductionSlider" type="HSlider" parent="Box/VBoxContainer/ProductionRow" unique_id=1104317432]
 layout_mode = 2
 size_flags_horizontal = 3

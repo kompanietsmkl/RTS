@@ -22,6 +22,11 @@ GameManager="*res://core/game_manager.gd"
 
 mouse_cursor/custom_image="uid://dkuq02u56o8qb"
 
+[navigation]
+
+3d/default_cell_size=0.1
+3d/default_cell_height=0.1
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

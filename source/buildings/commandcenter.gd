@@ -1,4 +1,5 @@
 extends Node3D
+var occupied_by_drone: Node = null
 
 
 # Called when the node enters the scene tree for the first time.

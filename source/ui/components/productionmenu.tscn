@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bfx4tw66kunlv"]
+
+[ext_resource type="Texture2D" uid="uid://buke7hgv0udl3" path="res://assets/icons/gatherer.png" id="1_77q4g"]
+[ext_resource type="Script" uid="uid://cwi434x22s02n" path="res://source/ui/components/productionmenu.gd" id="1_ue33a"]
+[ext_resource type="Texture2D" uid="uid://cq5npiccctg4m" path="res://assets/icons/defender.png" id="2_ue33a"]
+[ext_resource type="Texture2D" uid="uid://bbbgf5turop72" path="res://assets/icons/upgrade.jpg" id="4_egomt"]
+
+[node name="GridContainer" type="GridContainer" unique_id=1407816926]
+offset_right = 120.0
+offset_bottom = 40.0
+columns = 3
+script = ExtResource("1_ue33a")
+
+[node name="GathererProd" type="Button" parent="." unique_id=154215724]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "D"
+
+[node name="Gatherer" type="TextureRect" parent="GathererProd" unique_id=1977569748]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_77q4g")
+expand_mode = 2
+
+[node name="DefenderProd" type="Button" parent="." unique_id=794014321]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "G"
+
+[node name="Defender" type="TextureRect" parent="DefenderProd" unique_id=1632887866]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ue33a")
+expand_mode = 2
+
+[node name="Upgrade" type="Button" parent="." unique_id=1439557355]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "U"
+
+[node name="Upgrade" type="TextureRect" parent="Upgrade" unique_id=1839786691]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_egomt")
+expand_mode = 2

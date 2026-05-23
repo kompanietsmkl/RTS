@@ -2,11 +2,12 @@ extends Node
 
 # Сигналы для обновления UI и уведомления дронов
 signal credits_changed(new_amount)
-signal energy_distribution_changed(gathering, defense)
+signal energy_distribution_changed(gathering, defense, production)
 signal base_level_changed(new_level, new_max_energy)
+signal toggle_factory_ui()
 
 # Экономика
-var credits: int = 0:
+var credits: int = 1000:
 	set(value):
 		credits = value
 		credits_changed.emit(credits)
@@ -23,16 +24,18 @@ var max_energy: int = 5
 # Распределение энергии (приоритеты)
 var energy_gathering: int = 0
 var energy_defense: int = 0
+var energy_production: int = 0
 
 # Текущее количество активных дронов
 var active_gatherers: int = 0
 var active_defenders: int = 0
+var active_production: int = 0
 
 # --- ЛОГИКА ЭНЕРГИИ ---
 
 # Возвращает количество нераспределенной энергии
 func get_available_energy() -> int:
-	return max_energy - (energy_gathering + energy_defense)
+	return max_energy - (energy_gathering + energy_defense + energy_production)
 
 # Попытка установить новую энергию для добычи
 func set_energy_gathering(amount: int) -> bool:
@@ -43,7 +46,7 @@ func set_energy_gathering(amount: int) -> bool:
 		return false # Не хватает свободной энергии
 	
 	energy_gathering = amount
-	energy_distribution_changed.emit(energy_gathering, energy_defense)
+	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)
 	return true
 
 # Попытка установить новую энергию для защиты
@@ -55,7 +58,19 @@ func set_energy_defense(amount: int) -> bool:
 		return false # Не хватает свободной энергии
 		
 	energy_defense = amount
-	energy_distribution_changed.emit(energy_gathering, energy_defense)
+	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)
+	return true
+
+# Попытка установить новую энергию для производства
+func set_energy_production(amount: int) -> bool:
+	if amount < 0: return false
+	
+	var diff = amount - energy_production
+	if diff > 0 and get_available_energy() < diff:
+		return false # Не хватает свободной энергии
+		
+	energy_production = amount
+	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)
 	return true
 
 # --- ЛОГИКА ЭКОНОМИКИ ---

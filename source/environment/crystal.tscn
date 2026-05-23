@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxg0vpf0n3kaw" path="res://source/environment/crystal.gd" id="1_k4h5u"]
 [ext_resource type="Material" uid="uid://dan78l271ycrf" path="res://assets/textures/crystal.tres" id="1_s70gh"]
-[ext_resource type="PackedScene" uid="uid://mudo7iocwaba" path="res://source/ui/game/resourcebar.tscn" id="3_5pbmk"]
+[ext_resource type="PackedScene" uid="uid://mudo7iocwaba" path="res://source/ui/components/resourcebar.tscn" id="3_5pbmk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45lwb"]
 resource_name = "Material.001"
