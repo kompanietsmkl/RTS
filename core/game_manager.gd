@@ -6,7 +6,7 @@ signal energy_distribution_changed(gathering, defense)
 signal base_level_changed(new_level, new_max_energy)
 
 # Экономика
-var credits: int = 0:
+var credits: int = 100:
 	set(value):
 		credits = value
 		credits_changed.emit(credits)

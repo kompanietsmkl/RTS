@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bkn8olvrncj0t"]
 
+[ext_resource type="Texture2D" uid="uid://l7qweompjt0w" path="res://assets/textures/highlight/highlight.png" id="1_m4log"]
+
 [node name="HighlightRing" type="Node3D" unique_id=102306017]
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="." unique_id=481522738]
-inner_radius = 0.8
-outer_radius = 0.83
-sides = 50
+[node name="Decal" type="Decal" parent="." unique_id=1954896522]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("1_m4log")
+upper_fade = 0.0005100881
+lower_fade = 0.000721373

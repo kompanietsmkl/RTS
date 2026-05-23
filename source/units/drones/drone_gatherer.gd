@@ -19,7 +19,7 @@ var harvest_rate: float = 12.5 # 50 за 4 секунды
 var unload_time: float = 2.0
 var unload_timer: float = 0.0
 
-@export var interact_range := 1.5
+@export var interact_range := 2.5
 
 func _ready():
 	GameManager.energy_distribution_changed.connect(_on_energy_changed)
