@@ -4,8 +4,6 @@ extends Node3D
 var is_built: bool = false
 var current_level: int = 0
 
-
-
 func spawn_drone(unit_data: UnitData):
 	if not unit_data or not unit_data.unit_scene:
 		print("Ошибка спавна: не передан UnitData или отсутствует unit_scene")
@@ -28,8 +26,6 @@ func spawn_drone(unit_data: UnitData):
 	drone_instance.global_position = spawn_pos
 
 	print("Фабрика: Дрон ", unit_data.display_name, " заспавнен!")
-
-
 
 @onready var lvl1 = $"FactoryLVL1"
 @onready var lvl2 = $"FactoryLVL2"
@@ -68,7 +64,6 @@ func _ready() -> void:
 		lvl3.get_parent().remove_child(lvl3)
 
 	await get_tree().physics_frame
-	bake_navmesh()
 	update_click_zone()
 		
 func buy_factory():
@@ -132,5 +127,8 @@ func _on_click_input_event(camera: Node, event: InputEvent, event_position: Vect
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if not is_built:
 			buy_factory()
+			get_viewport().set_input_as_handled()
 		else:
-			GameManager.toggle_factory_ui.emit()
+			# Клик по уже построенной фабрике
+			GameManager.toggle_ui("factory")
+			get_viewport().set_input_as_handled()

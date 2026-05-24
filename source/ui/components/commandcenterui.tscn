@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b14a7m7h12lix"]
+
+[ext_resource type="Texture2D" uid="uid://dmr3enlnm65jw" path="res://assets/icons/upgrade.png" id="1_e7aab"]
+[ext_resource type="Script" uid="uid://clpg3dwh0i2p1" path="res://source/ui/components/commandcenterui.gd" id="1_fglme"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="2_fglme"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0tu6w"]
+font = ExtResource("2_fglme")
+font_size = 20
+
+[node name="Upgrade" type="Button" unique_id=1601488180]
+offset_right = 60.0
+offset_bottom = 60.0
+script = ExtResource("1_fglme")
+
+[node name="Upgrade" type="TextureRect" parent="." unique_id=802991987]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_e7aab")
+expand_mode = 2
+
+[node name="Price" type="Label" parent="." unique_id=1376132754]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_top = -20.0
+offset_right = 17.0
+grow_horizontal = 2
+text = "100"
+label_settings = SubResource("LabelSettings_0tu6w")
+horizontal_alignment = 1
+vertical_alignment = 1

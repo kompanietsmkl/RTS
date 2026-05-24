@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://b7pinudnewcnd"]
 
-[ext_resource type="Script" uid="uid://5banlqunyaff" path="res://source/ui/game/factoryprod.gd" id="1_3irw2"]
+[ext_resource type="Script" uid="uid://5banlqunyaff" path="res://source/ui/game/factory.gd" id="1_3irw2"]
 [ext_resource type="PackedScene" uid="uid://bfx4tw66kunlv" path="res://source/ui/components/productionmenu.tscn" id="1_41qdw"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=2091652824]
 script = ExtResource("1_3irw2")
+metadata/_edit_horizontal_guides_ = [612.0]
 
 [node name="GridContainer" parent="." unique_id=1407816926 instance=ExtResource("1_41qdw")]
 anchors_preset = 7

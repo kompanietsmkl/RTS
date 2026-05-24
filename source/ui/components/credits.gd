@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _on_credits_changed(new_amount: int) -> void:
 	# Конвертируем в формат (x.x)k
-	if new_amount < 1000: credits_label.text = "%d" % new_amount
+	if new_amount < 1000: credits_label.text = "%.1f" % new_amount
 	else:
 		var k_value =  float(new_amount) / 1000.0
 		credits_label.text = "%.1fk" % k_value

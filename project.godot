@@ -35,3 +35,4 @@ mouse_cursor/custom_image="uid://dyw62e36t5pwf"
 
 rendering_device/driver.windows="d3d12"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+anti_aliasing/quality/use_taa=true

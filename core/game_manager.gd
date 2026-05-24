@@ -5,11 +5,46 @@ signal credits_changed(new_amount)
 signal energy_distribution_changed(gathering, defense, production)
 signal base_level_changed(new_level, new_max_energy)
 signal toggle_factory_ui()
+signal toggle_commandcenter_ui()
+signal close_all_ui()
 signal drones_count_changed(gatherers_total, defenders_total)
 signal production_added(id: int, unit_data: UnitData)
 signal production_progress(id: int, time_left: float, duration: float)
 signal production_completed(id: int)
+signal drone_limit_changed(current, max_limit)
+var active_ui: String = ""
 
+func _ready() -> void:
+	# Глобальное первичное запекание навигации при старте игры
+	await get_tree().physics_frame
+	_bake_initial_navmesh()
+
+func _bake_initial_navmesh():
+	var nav_region = get_tree().root.find_child("NavigationRegion3D", true, false)
+	if nav_region and nav_region is NavigationRegion3D:
+		nav_region.bake_navigation_mesh()
+		print("Глобальный NavMesh (старт игры) успешно запечен!")
+	else:
+		print("ВНИМАНИЕ: Не удалось найти NavigationRegion3D при старте игры!")
+
+func toggle_ui(ui_name: String) -> void:
+	if active_ui == ui_name:
+		active_ui = ""
+		close_all_ui.emit()
+	else:
+		active_ui = ui_name
+		close_all_ui.emit()
+		if ui_name == "factory":
+			toggle_factory_ui.emit()
+		elif ui_name == "commandcenter":
+			toggle_commandcenter_ui.emit()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		# Клик в пустую область карты (не перехваченный UI или зданиями)
+		if active_ui != "":
+			active_ui = ""
+			close_all_ui.emit()
 
 # Экономика
 var credits: int = 1000:
@@ -21,20 +56,29 @@ var total_gatherers: int = 0:
 	set(value):
 		total_gatherers = value
 		drones_count_changed.emit(total_gatherers, total_defenders)
+		_emit_drone_limit()
 
 var total_defenders: int = 0:
 	set(value):
 		total_defenders = value
 		drones_count_changed.emit(total_gatherers, total_defenders)
+		_emit_drone_limit()
 
 # Статистика базы
 var base_level: int = 1:
 	set(value):
 		base_level = value
 		max_energy = 5 + (base_level - 1) * 2
+		max_drones = 4 + (base_level - 1) * 2
 		base_level_changed.emit(base_level, max_energy)
+		_emit_drone_limit()
 
 var max_energy: int = 5
+var max_drones: int = 4
+
+func _emit_drone_limit():
+	var current = total_gatherers + total_defenders + active_production
+	drone_limit_changed.emit(current, max_drones)
 
 # Распределение энергии (приоритеты)
 var energy_gathering: int = 0
@@ -44,7 +88,10 @@ var energy_production: int = 0
 # Текущее количество активных дронов
 var active_gatherers: int = 0
 var active_defenders: int = 0
-var active_production: int = 0
+var active_production: int = 0:
+	set(value):
+		active_production = value
+		_emit_drone_limit()
 
 var active_productions_list: Array[Dictionary] = []
 var next_production_id: int = 0
@@ -135,6 +182,11 @@ func upgrade_base(cost: int) -> bool:
 func start_production(unit_data: UnitData) -> bool:
 	if active_production >= energy_production:
 		print("Недостаточно энергии производства!")
+		return false
+		
+	var current_total = total_gatherers + total_defenders + active_production
+	if current_total >= max_drones:
+		print("Достигнут лимит дронов! Текущий лимит: ", max_drones)
 		return false
 		
 	if not spend_credits(unit_data.cost):

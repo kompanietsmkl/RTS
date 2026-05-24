@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://cmfo17oegmtar" path="res://source/ui/components/resourcebar.gd" id="1_b1g3s"]
 [ext_resource type="Texture2D" uid="uid://c0ccvsgkc5fni" path="res://assets/textures/resourcebar/resource-empty.png" id="1_n5inv"]
 [ext_resource type="Texture2D" uid="uid://cafy6skenhf63" path="res://assets/textures/resourcebar/resource-full.png" id="2_b1g3s"]
-[ext_resource type="FontFile" uid="uid://byf03nxaggt7c" path="res://assets/fonts/Kenney Future.ttf" id="4_x7bql"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="4_k3gxa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aklm6"]
 line_spacing = 0.0
-font = ExtResource("4_x7bql")
+font = ExtResource("4_k3gxa")
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
