@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://btp6k5g6uqmvv"]
+
+[ext_resource type="Script" uid="uid://bnwf4m10uywrs" path="res://source/resources/building_data.gd" id="1_bd"]
+
+[resource]
+script = ExtResource("1_bd")
+building_id = "commandcenter"
+display_name = "Base"
+level_costs = Array[int]([0, 150, 300])
+level_healths = Array[float]([250.0, 400.0, 500.0])

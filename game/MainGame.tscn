@@ -339,7 +339,7 @@ navigation_mesh = SubResource("NavigationMesh_r4rta")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
 
 [node name="CommandBase" parent="NavigationRegion3D/GAME_ENTITIES" unique_id=1963761738 instance=ExtResource("3_q5fd3")]
-transform = Transform3D(-1.0928253, 0, -1.0274887, 0, 1.5, 0, 1.0274887, 0, -1.0928253, -0.12746525, 0, -0.0019569397)
+transform = Transform3D(-1.0606602, 0, -1.0606602, 0, 1.5, 0, 1.0606602, 0, -1.0606602, -0.12746525, 0, -0.0019569397)
 
 [node name="CrystalsContainer" type="Node3D" parent="NavigationRegion3D/GAME_ENTITIES" unique_id=2091454562]
 

@@ -1,5 +1,11 @@
 extends Node3D
 
+@export var data: BuildingData = preload("res://source/resources/commandcenter_data.tres")
+
+var current_health: float = 0.0
+var max_health: float = 0.0
+@onready var healthbar = $Healthbar if has_node("Healthbar") else null
+
 var occupied_by_drone: Node = null
 
 # Границы клика для каждого уровня (относительно локальных координат базы)
@@ -15,6 +21,12 @@ const CLICK_BOUNDS = {
 
 func _ready() -> void:
 	add_to_group("commandcenter")
+	
+	if data and data.level_healths.size() > 0:
+		max_health = data.level_healths[0]
+		current_health = max_health
+	if healthbar:
+		healthbar.init_health(max_health, current_health)
 	
 	# Скрываем (удаляем из дерева) уровни, которые еще не достигнуты, чтобы NavMesh их не учитывал
 	if lvl2:
@@ -50,22 +62,27 @@ func _input(event: InputEvent) -> void:
 
 func get_upgrade_cost() -> int:
 	var level = GameManager.base_level
-	if level == 1:
-		return 150
-	elif level == 2:
-		return 300
+	if data and level < data.level_costs.size():
+		return data.level_costs[level]
 	return -1 # MAX
 
 func upgrade_base() -> void:
 	var cost = get_upgrade_cost()
 	if cost <= 0:
-		print("База максимального уровня!")
+		GameManager.show_alert.emit("Base is already at maximum level!", GameManager.AlertType.WARNING)
 		return
 		
 	if GameManager.spend_credits(cost):
 		var old_level = GameManager.base_level
 		GameManager.base_level += 1
-		print("База улучшена до уровня ", GameManager.base_level)
+		GameManager.show_alert.emit("Base upgraded to level " + str(GameManager.base_level), GameManager.AlertType.SUCCESS)
+		
+		# Полный отхил при апгрейде
+		if data and GameManager.base_level <= data.level_healths.size():
+			max_health = data.level_healths[GameManager.base_level - 1]
+			current_health = max_health
+			if healthbar:
+				healthbar.init_health(max_health, current_health)
 		
 		# Добавляем в дерево модель нового уровня
 		if GameManager.base_level == 2 and lvl2 and lvl2.get_parent() == null:
@@ -77,12 +94,21 @@ func upgrade_base() -> void:
 		await get_tree().physics_frame
 		bake_navmesh()
 	else:
-		print("Недостаточно кредитов для улучшения базы!")
+		GameManager.show_alert.emit("Not enough credits to upgrade base!", GameManager.AlertType.ERROR)
 
 func bake_navmesh():
 	var nav_region = get_tree().root.find_child("NavigationRegion3D", true, false)
 	if nav_region and nav_region is NavigationRegion3D:
 		nav_region.bake_navigation_mesh()
-		print("NavMesh (Base) успешно обновлен!")
+		print("NavMesh (Base) successfully updated!")
 	else:
-		print("ВНИМАНИЕ: Не удалось найти NavigationRegion3D для запекания от базы!")
+		print("WARNING: Could not find NavigationRegion3D to bake from base!")
+
+func take_damage(amount: float) -> void:
+	current_health -= amount
+	if healthbar:
+		healthbar.update_health(current_health)
+	if current_health <= 0:
+		print("Base destroyed! GAME OVER.")
+		# В будущем здесь будет сигнал поражения
+		queue_free()

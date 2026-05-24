@@ -12,6 +12,10 @@ signal production_added(id: int, unit_data: UnitData)
 signal production_progress(id: int, time_left: float, duration: float)
 signal production_completed(id: int)
 signal drone_limit_changed(current, max_limit)
+
+enum AlertType { INFO, SUCCESS, WARNING, ERROR }
+signal show_alert(message: String, type: AlertType)
+
 var active_ui: String = ""
 
 func _ready() -> void:
@@ -23,9 +27,9 @@ func _bake_initial_navmesh():
 	var nav_region = get_tree().root.find_child("NavigationRegion3D", true, false)
 	if nav_region and nav_region is NavigationRegion3D:
 		nav_region.bake_navigation_mesh()
-		print("Глобальный NavMesh (старт игры) успешно запечен!")
+		print("Global NavMesh successfully baked!")
 	else:
-		print("ВНИМАНИЕ: Не удалось найти NavigationRegion3D при старте игры!")
+		print("WARNING: Could not find NavigationRegion3D on start!")
 
 func toggle_ui(ui_name: String) -> void:
 	if active_ui == ui_name:
@@ -181,19 +185,19 @@ func upgrade_base(cost: int) -> bool:
 
 func start_production(unit_data: UnitData) -> bool:
 	if active_production >= energy_production:
-		print("Недостаточно энергии производства!")
+		show_alert.emit("Not enough energy for production!", AlertType.WARNING)
 		return false
 		
 	var current_total = total_gatherers + total_defenders + active_production
 	if current_total >= max_drones:
-		print("Достигнут лимит дронов! Текущий лимит: ", max_drones)
+		show_alert.emit("Drone limit reached! Current limit: " + str(max_drones), AlertType.WARNING)
 		return false
 		
 	if not spend_credits(unit_data.cost):
-		print("Недостаточно кредитов!")
+		show_alert.emit("Insufficient credits!", AlertType.ERROR)
 		return false
 		
-	print("Начинаю производство дрона: ", unit_data.display_name)
+	show_alert.emit("Production started: " + unit_data.display_name, AlertType.INFO)
 	active_production += 1
 	
 	var prod_id = next_production_id

@@ -1,8 +1,12 @@
 extends Node3D
 
+@export var data: BuildingData = preload("res://source/resources/factory_data.tres")
 @export var factory_cost: int = 100
 var is_built: bool = false
 var current_level: int = 0
+var current_health: float = 0.0
+var max_health: float = 0.0
+@onready var healthbar = $Healthbar if has_node("Healthbar") else null
 
 func spawn_drone(unit_data: UnitData):
 	if not unit_data or not unit_data.unit_scene:
@@ -55,6 +59,14 @@ func update_click_zone():
 		click_shape.position = CLICK_OFFSETS[current_level]
 
 func _ready() -> void:
+	add_to_group("factory")
+	
+	if data and data.level_healths.size() > 0:
+		max_health = data.level_healths[0]
+		current_health = max_health
+	if healthbar:
+		healthbar.init_health(max_health, current_health)
+		
 	# Убираем невидимые уровни из дерева — тогда NavMesh их не увидит
 	if lvl1:
 		lvl1.get_parent().remove_child(lvl1)
@@ -89,39 +101,50 @@ func bake_navmesh():
 	else:
 		print("ВНИМАНИЕ: Не удалось найти NavigationRegion3D для запекания!")
 
+func take_damage(amount: float) -> void:
+	if not is_built: return
+	current_health -= amount
+	if healthbar:
+		healthbar.update_health(current_health)
+	if current_health <= 0:
+		print("Factory destroyed!")
+		queue_free()
+
 
 func get_upgrade_cost() -> int:
-	if current_level == 1:
-		return 200
-	elif current_level == 2:
-		return 350
-	return -1
+	if data and current_level < data.level_costs.size():
+		return data.level_costs[current_level]
+	return -1 # MAX
 
 func upgrade_factory():
-	if current_level == 1:
-		var cost = 200
-		if GameManager.spend_credits(cost):
-			print("Фабрика улучшена до 2 уровня за ", cost, " кредитов!")
+	var cost = get_upgrade_cost()
+	if cost <= 0:
+		GameManager.show_alert.emit("Factory is already at maximum level!", GameManager.AlertType.WARNING)
+		return
+		
+	if GameManager.spend_credits(cost):
+		GameManager.show_alert.emit("Factory upgraded to level " + str(current_level + 1) + "!", GameManager.AlertType.SUCCESS)
+		current_level += 1
+		
+		# Добавляем нужную модель
+		if current_level == 2 and lvl2 and lvl2.get_parent() == null:
 			add_child(lvl2)
-			current_level = 2
-			update_click_zone()
-			await get_tree().physics_frame
-			bake_navmesh()
-		else:
-			print("Не хватает кредитов для апгрейда до 2 уровня! Нужно ", cost, ", а есть ", GameManager.credits)
-	elif current_level == 2:
-		var cost = 350
-		if GameManager.spend_credits(cost):
-			print("Фабрика улучшена до 3 уровня за ", cost, " кредитов!")
+		elif current_level == 3 and lvl3 and lvl3.get_parent() == null:
 			add_child(lvl3)
-			current_level = 3
-			update_click_zone()
-			await get_tree().physics_frame
-			bake_navmesh()
-		else:
-			print("Не хватает кредитов для апгрейда до 3 уровня! Нужно ", cost, ", а есть ", GameManager.credits)
+			
+		update_click_zone()
+		
+		# Полный отхил при апгрейде
+		if data and current_level <= data.level_healths.size():
+			max_health = data.level_healths[current_level - 1]
+			current_health = max_health
+			if healthbar:
+				healthbar.init_health(max_health, current_health)
+				
+		await get_tree().physics_frame
+		bake_navmesh()
 	else:
-		print("Фабрика уже максимального уровня!")
+		GameManager.show_alert.emit("Not enough credits to upgrade factory!", GameManager.AlertType.ERROR)
 
 func _on_click_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -129,6 +152,6 @@ func _on_click_input_event(camera: Node, event: InputEvent, event_position: Vect
 			buy_factory()
 			get_viewport().set_input_as_handled()
 		else:
-			# Клик по уже построенной фабрике
+			# Click on an already built factory
 			GameManager.toggle_ui("factory")
 			get_viewport().set_input_as_handled()
