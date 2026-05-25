@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dx1udnkofgeau"]
 
 [ext_resource type="Script" uid="uid://7ldbm85ureyk" path="res://source/ui/components/credits.gd" id="1_4eslh"]
-[ext_resource type="Texture2D" uid="uid://du0t7r60vta5b" path="res://assets/textures/ui-pack/panel_rectangle.png" id="1_vusr6"]
 [ext_resource type="LabelSettings" uid="uid://d0rx8mqh45rrs" path="res://assets/fonts/Auire/aquire_label_settings.tres" id="3_4eslh"]
 [ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="4_1605t"]
 
@@ -19,36 +18,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4eslh")
 
-[node name="Box" type="NinePatchRect" parent="." unique_id=689555479]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=959722634]
 layout_mode = 0
-offset_right = 210.0
-offset_bottom = 30.0
-texture = ExtResource("1_vusr6")
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Box" unique_id=1598901675]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -94.0
-offset_top = -16.0
-offset_right = 105.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(73, 17)
-
-[node name="Header" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=544639300]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=886481588]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Box/VBoxContainer/Header" unique_id=507647310]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=771034575]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=1019480085]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=991125480]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=1641830095]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "credits:"
 label_settings = ExtResource("3_4eslh")
 
-[node name="CreditsLabel" type="Label" parent="Box/VBoxContainer/Header" unique_id=879631935]
+[node name="CreditsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=754625883]
 layout_mode = 2
 text = "1.2k"
 label_settings = SubResource("LabelSettings_ocrs4")

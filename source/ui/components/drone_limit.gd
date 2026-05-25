@@ -1,6 +1,6 @@
 extends Control
 
-@onready var limit_label = $Box/VBoxContainer/Header/DroneLabel
+@onready var limit_label = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header/DroneLabel
 
 func _ready() -> void:
 	GameManager.drone_limit_changed.connect(_on_drone_limit_changed)

@@ -1,6 +1,6 @@
 extends Control
 
-@onready var credits_label = $Box/VBoxContainer/Header/CreditsLabel
+@onready var credits_label = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header/CreditsLabel
 
 func _ready() -> void:
 	# Подписываемся на изменение кредитов
