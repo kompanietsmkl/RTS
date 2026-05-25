@@ -1,6 +1,7 @@
 extends Node3D
 
 const AlienScene = preload("res://source/units/aliens/alien.tscn")
+const CatalystScene = preload("res://source/units/aliens/catalyst.tscn")
 
 var wave_number: int = 0
 var wave_timer: float = 0.0
@@ -53,15 +54,25 @@ func spawn_wave() -> void:
 		
 	previous_wave_size = total_mobs
 	
+	# Вычисляем количество катализаторов (20% волны, начиная со 2-й волны)
+	var catalyst_count = 0
+	if wave_number >= 2:
+		catalyst_count = max(1, int(total_mobs * 0.2))
+	
 	GameManager.show_alert.emit("Wave " + str(wave_number) + " has arrived! (" + str(total_mobs) + " aliens)", GameManager.AlertType.ERROR)
 	
 	for i in range(total_mobs):
-		var alien = AlienScene.instantiate()
-		get_tree().current_scene.add_child(alien)
+		var alien_instance = null
+		if i < catalyst_count:
+			alien_instance = CatalystScene.instantiate()
+		else:
+			alien_instance = AlienScene.instantiate()
+			
+		get_tree().current_scene.add_child(alien_instance)
 		
 		# По очереди выбираем один из углов
 		var spawn_pos = spawn_points[i % spawn_points.size()]
 		
 		# Добавляем случайное смещение, чтобы они не спавнились в одной точке
 		var offset = Vector3(randf_range(-3, 3), 0, randf_range(-3, 3))
-		alien.global_position = spawn_pos + offset
+		alien_instance.global_position = spawn_pos + offset

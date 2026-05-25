@@ -110,5 +110,27 @@ func take_damage(amount: float) -> void:
 		healthbar.update_health(current_health)
 	if current_health <= 0:
 		print("Base destroyed! GAME OVER.")
-		# В будущем здесь будет сигнал поражения
+		GameManager.base_destroyed.emit()
 		queue_free()
+
+func load_state(level: int, health: float) -> void:
+	# First hide/remove lvl2 and lvl3 if they exist, then re-add based on loaded level
+	if lvl2 and lvl2.get_parent() == self:
+		remove_child(lvl2)
+	if lvl3 and lvl3.get_parent() == self:
+		remove_child(lvl3)
+		
+	if level >= 2 and lvl2 and lvl2.get_parent() == null:
+		add_child(lvl2)
+	if level >= 3 and lvl3 and lvl3.get_parent() == null:
+		add_child(lvl3)
+		
+	if data and level <= data.level_healths.size() and level > 0:
+		max_health = data.level_healths[level - 1]
+	else:
+		if data and data.level_healths.size() > 0:
+			max_health = data.level_healths[0]
+			
+	current_health = health
+	if healthbar:
+		healthbar.init_health(max_health, current_health)

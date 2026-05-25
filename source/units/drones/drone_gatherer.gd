@@ -27,16 +27,22 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	GameManager.total_gatherers -= 1
+	if is_active:
+		GameManager.active_gatherers -= 1
 
 func _ready():
+	add_to_group("drones")
+	add_to_group("gatherers")
 	GameManager.energy_distribution_changed.connect(_on_energy_changed)
+	if healthbar:
+		healthbar.init_health(max_health, current_health)
 	
-	var bases = get_tree().get_nodes_in_group("base")
+	var bases = get_tree().get_nodes_in_group("commandcenter")
 	if bases.size() > 0:
 		base_building = bases[0]
-		print("Дрон: База найдена!")
+		print("Дрон-сборщик: База найдена!")
 	else:
-		print("ОШИБКА: Дрон не нашел базу в группе 'base'!")
+		print("Дрон-сборщик: База не найдена при старте, поиск отложен.")
 
 func _on_energy_changed(gathering_energy: int, _defense_energy: int, _production_energy: int):
 	if is_active and GameManager.active_gatherers > gathering_energy:
@@ -173,7 +179,11 @@ func find_new_crystal():
 
 func return_to_base(delta: float):
 	if not is_instance_valid(base_building):
-		return
+		var bases = get_tree().get_nodes_in_group("commandcenter")
+		if bases.size() > 0:
+			base_building = bases[0]
+		else:
+			return
 		
 	var dist = global_position.distance_to(base_building.global_position)
 	if dist <= interact_range + 3.0:

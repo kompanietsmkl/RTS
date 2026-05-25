@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://duypuw5hw77uw" path="res://game/camerapivot.gd" id="1_8tija"]
 [ext_resource type="Script" uid="uid://ornppttcx3dn" path="res://game/directional_light_3d.gd" id="1_r4rta"]
+[ext_resource type="Script" uid="uid://dogebv0xqsyb3" path="res://game/maingame.gd" id="2_maingame"]
 [ext_resource type="PackedScene" uid="uid://dqce3sxocjfy5" path="res://source/units/drones/drone_gatherer.tscn" id="3_agtre"]
 [ext_resource type="PackedScene" uid="uid://b4vdcw30y561g" path="res://source/buildings/commandcenter.tscn" id="3_q5fd3"]
+[ext_resource type="PackedScene" uid="uid://66pbi1uqcc83" path="res://source/units/drones/drone_defender.tscn" id="4_4oc2a"]
 [ext_resource type="PackedScene" uid="uid://0hpbcb2ji48i" path="res://source/buildings/factory.tscn" id="4_agtre"]
 [ext_resource type="MeshLibrary" uid="uid://cwbdjxw1acxd5" path="res://assets/models/meshlibs/ML1.tres" id="4_r4rta"]
 [ext_resource type="PackedScene" uid="uid://dpyqo8mdg5hr8" path="res://source/environment/crystal.tscn" id="4_u3mfo"]
@@ -15,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cq2yga28sykx0" path="res://source/ui/game/commandcenter.tscn" id="11_a4osd"]
 [ext_resource type="PackedScene" uid="uid://dkdbst817i0hx" path="res://source/ui/menu/main-menu.tscn" id="14_jpc7f"]
 [ext_resource type="PackedScene" uid="uid://coqpc3f52k3tb" path="res://source/ui/menu/pause-menu.tscn" id="15_itulm"]
+[ext_resource type="PackedScene" uid="uid://3w6c8dxx08kn" path="res://source/ui/components/gameover.tscn" id="18_f7asa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rvslj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -341,6 +344,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_36ckn")
 
 [node name="MainGame" type="Node3D" unique_id=1880158248]
+script = ExtResource("2_maingame")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1912129969]
 environment = SubResource("Environment_rarhs")
@@ -363,11 +367,11 @@ projection = 1
 size = 10.0
 far = 100.0
 
-[node name="Drone1" parent="." unique_id=1771977173 instance=ExtResource("3_agtre")]
-transform = Transform3D(-0.99996114, 0, 0.008813895, 0, 1, 0, -0.008813895, 0, -0.99996114, 3.3582227, 0, 4.555819)
+[node name="Defender" parent="." unique_id=1771977173 instance=ExtResource("4_4oc2a")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0, 3)
 
-[node name="Drone2" parent="." unique_id=2111980435 instance=ExtResource("3_agtre")]
-transform = Transform3D(-0.99996114, 0, 0.008813895, 0, 1, 0, -0.008813895, 0, -0.99996114, -0.9109566, -4.7683716e-07, 6.3859286)
+[node name="Gatherer" parent="." unique_id=2111980435 instance=ExtResource("3_agtre")]
+transform = Transform3D(-0.99996114, 0, 0.008813895, 0, 1, 0, -0.008813895, 0, -0.99996114, -1, 0, 6)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=312672049]
 navigation_mesh = SubResource("NavigationMesh_r4rta")
@@ -500,6 +504,10 @@ mesh = SubResource("ArrayMesh_bm6vi")
 [node name="MainMenu" parent="UI" unique_id=791118656 instance=ExtResource("14_jpc7f")]
 
 [node name="PauseMenu" parent="UI" unique_id=1225115705 instance=ExtResource("15_itulm")]
+visible = false
+
+[node name="GameOver" parent="UI" unique_id=1515012303 instance=ExtResource("18_f7asa")]
+visible = false
 
 [editable path="NavigationRegion3D/GAME_ENTITIES/Factory"]
 [editable path="NavigationRegion3D/GAME_ENTITIES/CommandBase"]

@@ -155,3 +155,35 @@ func _on_click_input_event(camera: Node, event: InputEvent, event_position: Vect
 			# Click on an already built factory
 			GameManager.toggle_ui("factory")
 			get_viewport().set_input_as_handled()
+
+func load_state(built: bool, level: int, health: float) -> void:
+	is_built = built
+	current_level = level
+	
+	# First hide/remove lvl1, lvl2, lvl3 if they exist in the tree
+	if lvl1 and lvl1.get_parent() == self:
+		remove_child(lvl1)
+	if lvl2 and lvl2.get_parent() == self:
+		remove_child(lvl2)
+	if lvl3 and lvl3.get_parent() == self:
+		remove_child(lvl3)
+		
+	if is_built:
+		if current_level >= 1 and lvl1 and lvl1.get_parent() == null:
+			add_child(lvl1)
+		if current_level >= 2 and lvl2 and lvl2.get_parent() == null:
+			add_child(lvl2)
+		if current_level >= 3 and lvl3 and lvl3.get_parent() == null:
+			add_child(lvl3)
+			
+	update_click_zone()
+	
+	if data and current_level <= data.level_healths.size() and current_level > 0:
+		max_health = data.level_healths[current_level - 1]
+	else:
+		if data and data.level_healths.size() > 0:
+			max_health = data.level_healths[0]
+			
+	current_health = health
+	if healthbar:
+		healthbar.init_health(max_health, current_health)

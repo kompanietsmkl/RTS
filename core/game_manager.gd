@@ -12,11 +12,14 @@ signal production_added(id: int, unit_data: UnitData)
 signal production_progress(id: int, time_left: float, duration: float)
 signal production_completed(id: int)
 signal drone_limit_changed(current, max_limit)
+signal base_destroyed()
 
 enum AlertType { INFO, SUCCESS, WARNING, ERROR }
 signal show_alert(message: String, type: AlertType)
 
 var active_ui: String = ""
+var should_start_directly: bool = false
+var should_load_save: bool = false
 
 func _ready() -> void:
 	# Глобальное первичное запекание навигации при старте игры
@@ -198,6 +201,7 @@ func start_production(unit_data: UnitData) -> bool:
 		return false
 		
 	show_alert.emit("Production started: " + unit_data.display_name, AlertType.INFO)
+	SoundManager.play_sfx("production")
 	active_production += 1
 	
 	var prod_id = next_production_id
@@ -212,3 +216,14 @@ func start_production(unit_data: UnitData) -> bool:
 	
 	production_added.emit(prod_id, unit_data)
 	return true
+
+func reset_state() -> void:
+	credits = 1000
+	base_level = 1
+	active_production = 0
+	active_productions_list.clear()
+	next_production_id = 0
+	energy_gathering = 0
+	energy_defense = 0
+	energy_production = 0
+	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)

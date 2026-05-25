@@ -14,9 +14,14 @@ config/name="ARES"
 run/main_scene="uid://ypp05q53vvi1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
+
 [autoload]
 
 GameManager="*res://core/game_manager.gd"
+SoundManager="*res://core/sound_manager.gd"
 
 [display]
 
