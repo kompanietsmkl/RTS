@@ -908,9 +908,6 @@ shape = SubResource("CylinderShape3D_f84ad")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41125488, 0)
 shape = SubResource("CylinderShape3D_t4l0q")
 
-[node name="Healthbar" parent="BaseLVL1" unique_id=104868348 instance=ExtResource("12_t4l0q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
 [node name="satelliteDish" type="MeshInstance3D" parent="BaseLVL1" unique_id=41617872]
 transform = Transform3D(0.82119906, 0, -0.5706419, 0, 1, 0, 0.5706419, 0, 0.82119906, 1.588746, 2.3841858e-07, -0.6906067)
 mesh = SubResource("ArrayMesh_t4l0q")
@@ -1048,3 +1045,6 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BaseLVL3" unique_id=1458989886]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_t4l0q")
+
+[node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("12_t4l0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

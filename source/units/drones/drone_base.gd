@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name DroneBase
 
 # Общие параметры для всех дронов
-@export var speed := 5.0
+@export var speed := 3.0
 @export var max_health := 100.0
 var current_health := max_health
 

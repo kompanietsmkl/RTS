@@ -4,9 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/components/healthbar.tscn" id="2_4gd5e"]
 [ext_resource type="Texture2D" uid="uid://jc2lu84qyvv1" path="res://assets/models/aliens/test_pallete.png" id="3_0ukst"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ilb0n"]
-points = PackedVector3Array(-54.963776, 90.836685, -126.59257, -67.71022, 0.00043393747, -117.27408, -71.57617, 100.42743, -123.940765, 54.935745, 90.836685, -126.59257, -135.42043, 0.00043393747, 0.00011444092, -137.12929, 90.836685, -15.712448, -82.16552, 90.836685, -110.90479, 67.682175, 0.00043393747, -117.27408, -143.0963, 100.42743, 0.00011444092, -16.024109, 155.45926, -27.732307, 15.912018, 155.45926, -27.781876, 71.52011, 100.42743, -123.940765, -82.16552, 90.836685, 110.880226, -137.12929, 90.836685, 15.687889, -67.71022, 0.00043393747, 117.24952, 82.13748, 90.836685, -110.90479, 137.10124, 90.836685, -15.712448, 135.39238, 0.00043393747, 0.00011444092, -71.57617, 100.42743, 123.91621, -32.020187, 155.45926, 0.00011444092, 29.33081, 156.51639, -0.07424164, 143.06825, 100.42743, 0.00011444092, -54.963776, 90.836685, 126.5928, 67.682175, 0.00043393747, 117.24952, 137.10124, 90.836685, 15.687889, 82.13748, 90.836685, 110.880226, -16.024109, 155.45926, 27.707756, 71.52011, 100.42743, 123.91621, 15.996063, 155.45926, 27.707756, 54.935745, 90.836685, 126.5928)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8vfw"]
 resource_name = "FrontColor"
 albedo_texture = ExtResource("3_0ukst")
@@ -44,19 +41,21 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7qsva")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_0ukst"]
+radius = 100.0
+
 [node name="Alien" type="CharacterBody3D" unique_id=1837261925]
 script = ExtResource("1_y4rbs")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=50012295]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=621457482]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_ilb0n")
-
 [node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("2_4gd5e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0)
 
 [node name="Arachnid" type="MeshInstance3D" parent="." unique_id=1371686406]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1wj12")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=73406413]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_0ukst")
