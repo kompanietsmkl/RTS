@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://dx1udnkofgeau" path="res://source/ui/components/credits.tscn" id="2_1nkv2"]
 [ext_resource type="PackedScene" uid="uid://dsmiomcnwygsv" path="res://source/ui/components/drones.tscn" id="3_jisra"]
 [ext_resource type="PackedScene" uid="uid://ba7rpdwiy26fd" path="res://source/ui/components/drone_limit.tscn" id="5_xr0nn"]
+[ext_resource type="PackedScene" uid="uid://dob80lhdtuvkv" path="res://source/ui/components/heal.tscn" id="6_gm6lp"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1284809205]
 script = ExtResource("1_hud_script")
 metadata/_edit_horizontal_guides_ = [15.0]
-metadata/_edit_vertical_guides_ = [133.0, 151.0]
+metadata/_edit_vertical_guides_ = [133.0, 151.0, 1137.0]
 
 [node name="EnergyPanel" parent="." unique_id=1135170803 instance=ExtResource("1_5v2im")]
 offset_left = 15.0
@@ -65,9 +66,22 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1150.0
+offset_left = -1135.0
 offset_top = -150.0
-offset_right = -15.0
 offset_bottom = -110.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="Heal" parent="." unique_id=449678221 instance=ExtResource("6_gm6lp")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -248.0
+offset_right = -15.0
+offset_bottom = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(24, 24)

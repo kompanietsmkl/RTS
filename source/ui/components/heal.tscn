@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dob80lhdtuvkv"]
+
+[ext_resource type="FontFile" uid="uid://brg17l6i1b5d1" path="res://assets/fonts/MONTSERRAT.TTF" id="1_vmqfa"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="2_brnpr"]
+
+[sub_resource type="FontVariation" id="FontVariation_cpmji"]
+base_font = ExtResource("1_vmqfa")
+variation_opentype = {
+2003265652: 800
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_t2hy8"]
+font = ExtResource("2_brnpr")
+font_size = 20
+
+[node name="Heal" type="Button" unique_id=449678221]
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="HealLabel" type="Label" parent="." unique_id=1894295943]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_cpmji")
+theme_override_font_sizes/font_size = 40
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Price" type="Label" parent="." unique_id=1824300837]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_top = -20.0
+offset_right = 17.0
+grow_horizontal = 2
+pivot_offset = Vector2(17, 10)
+text = "100"
+label_settings = SubResource("LabelSettings_t2hy8")

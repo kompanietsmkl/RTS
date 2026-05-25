@@ -74,16 +74,13 @@ func get_base_occupant() -> Node:
 	return null
 
 func execute_behavior(delta: float):
-	if not is_active:
-		if current_state != State.IDLE:
-			return_to_base(delta)
-		else:
-			activate()
-		return
-		
 	match current_state:
 		State.IDLE:
-			find_new_crystal()
+			velocity = Vector3.ZERO
+			if not is_active:
+				activate()
+			else:
+				find_new_crystal()
 			
 		State.MOVING_TO_CRYSTAL:
 			if not is_instance_valid(target_crystal) or target_crystal.get("occupied_by_drone") != self:
@@ -93,12 +90,14 @@ func execute_behavior(delta: float):
 			
 			var dist = global_position.distance_to(target_crystal.global_position)
 			if dist <= interact_range:
+				velocity = Vector3.ZERO
 				print("Дрон: Доехал до кристалла. Начинаю добычу!")
 				current_state = State.GATHERING
 			else:
 				move_to_target(target_crystal.global_position, delta)
 				
 		State.GATHERING:
+			velocity = Vector3.ZERO
 			if not is_instance_valid(target_crystal) or not target_crystal.is_in_group("crystals") or target_crystal.get("occupied_by_drone") != self:
 				release_crystal()
 				current_state = State.RETURNING_TO_BASE
@@ -124,6 +123,7 @@ func execute_behavior(delta: float):
 			return_to_base(delta)
 			
 		State.WAITING_TO_UNLOAD:
+			velocity = Vector3.ZERO
 			if is_instance_valid(base_building) and get_base_occupant() == null:
 				base_building.set_meta("occupied_by_drone", self)
 				print("Дрон: База освободилась, начинаю разгрузку!")
@@ -131,9 +131,10 @@ func execute_behavior(delta: float):
 				unload_timer = unload_time
 			
 		State.UNLOADING:
+			velocity = Vector3.ZERO
 			unload_timer -= delta
 			if unload_timer <= 0:
-				var credits_earned = round(current_resources / 5.0)
+				var credits_earned = GameManager.convert_resources_to_credits(current_resources)
 				print("Дрон: Разгрузился на базе! Жду кулдаун. Заработано кредитов: ", credits_earned)
 				GameManager.add_credits(credits_earned)
 				print("Всего кредитов: ", GameManager.credits)
@@ -187,6 +188,7 @@ func return_to_base(delta: float):
 		
 	var dist = global_position.distance_to(base_building.global_position)
 	if dist <= interact_range + 3.0:
+		velocity = Vector3.ZERO
 		if current_resources > 0:
 			var occupant = get_base_occupant()
 			if occupant == null or occupant == self:
