@@ -10,7 +10,6 @@ var warning_shown: bool = false
 var previous_wave_size: int = 0
 
 
-# Координаты спавнов по диагонали (для карты 60x60)
 var spawn_points: Array[Vector3] = [
 	Vector3(-25, 0, 25),
 	Vector3(25, 0, -25)
@@ -21,12 +20,10 @@ func _process(delta: float) -> void:
 	
 	var time_left = time_to_next_wave - wave_timer
 	
-	# Предупреждение за 10 секунд
 	if time_left <= 10.0 and not warning_shown:
 		warning_shown = true
 		GameManager.show_alert.emit("Warning! Alien wave approaching in 10 seconds!", GameManager.AlertType.WARNING)
 		
-	# Спавн волны
 	if wave_timer >= time_to_next_wave:
 		spawn_wave()
 		wave_timer = 0.0
@@ -45,17 +42,14 @@ func spawn_wave() -> void:
 	if factories.size() > 0:
 		factory_level = factories[0].current_level
 		
-	# Эвристическая формула усложнения
 	var bonus = int(total_defenders / 3.0) + base_level + factory_level
 	var total_mobs = base_amount + bonus
 	
-	# Гарантируем, что волна всегда больше предыдущей
 	if total_mobs <= previous_wave_size:
 		total_mobs = previous_wave_size + 1
 		
 	previous_wave_size = total_mobs
 	
-	# Вычисляем количество катализаторов (20% волны, начиная со 2-й волны)
 	var catalyst_count = 0
 	if wave_number >= 2:
 		catalyst_count = max(1, int(total_mobs * 0.2))
@@ -72,9 +66,7 @@ func spawn_wave() -> void:
 			
 		get_tree().current_scene.add_child(alien_instance)
 		
-		# По очереди выбираем один из углов
 		var spawn_pos = spawn_points[i % spawn_points.size()]
 		
-		# Добавляем случайное смещение, чтобы они не спавнились в одной точке
 		var offset = Vector3(randf_range(-3, 3), 0, randf_range(-3, 3))
 		alien_instance.global_position = spawn_pos + offset

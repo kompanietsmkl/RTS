@@ -4,14 +4,13 @@ extends Button
 @onready var status_label = $Status
 
 func setup(unit_data: UnitData):
-	# Ждем, пока дочерние узлы инициализируются, если вызываем сразу после instantiate
 	if not is_node_ready():
 		await ready
 		
 	if unit_data and unit_data.icon:
 		icon_rect.texture = unit_data.icon
 	else:
-		print("ВНИМАНИЕ: Иконка не найдена в ресурсе")
+		print("WARNING: Icon not found in resource")
 		
 	status_label.text = "0%"
 

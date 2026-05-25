@@ -3,7 +3,6 @@ extends PanelContainer
 @onready var label = $MarginContainer/Label
 
 func _ready() -> void:
-	# На случай если init_alert не был вызван (например, при тестировании сцены)
 	if not label:
 		label = $MarginContainer/Label
 
@@ -26,21 +25,19 @@ func init_alert(text: String, type: int):
 	
 	match type:
 		GameManager.AlertType.INFO:
-			style.border_color = Color(0.2, 0.6, 1.0, 1.0) # Синий
+			style.border_color = Color(0.2, 0.6, 1.0, 1.0)
 		GameManager.AlertType.SUCCESS:
-			style.border_color = Color(0.2, 0.8, 0.2, 1.0) # Зеленый
+			style.border_color = Color(0.2, 0.8, 0.2, 1.0)
 		GameManager.AlertType.WARNING:
-			style.border_color = Color(1.0, 0.8, 0.0, 1.0) # Желтый
+			style.border_color = Color(1.0, 0.8, 0.0, 1.0)
 		GameManager.AlertType.ERROR:
-			style.border_color = Color(0.9, 0.2, 0.2, 1.0) # Красный
+			style.border_color = Color(0.9, 0.2, 0.2, 1.0)
 			
 	add_theme_stylebox_override("panel", style)
 	
-	# Анимация
 	modulate.a = 0
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.3)
-	# Чем длиннее текст, тем дольше висит
 	var wait_time = max(3.0, text.length() * 0.08)
 	tween.tween_interval(wait_time) 
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)

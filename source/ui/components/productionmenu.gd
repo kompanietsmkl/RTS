@@ -50,12 +50,10 @@ func _on_upgrade_pressed():
 		if factory and factory.has_method("upgrade_factory"):
 			factory.upgrade_factory()
 		else:
-			print("ОШИБКА: Фабрика не найдена для апгрейда!")
+			print("ERROR: Factory not found for upgrade!")
 			
-	# Обновляем цены после попытки апгрейда
 	update_prices()
 
 func _try_produce_drone(unit_data: UnitData, button: Button):
-	# Вся логика проверок ресурсов и энергии теперь внутри GameManager
 	if GameManager.start_production(unit_data):
-		pass # Успешно начали производство
+		pass

@@ -8,8 +8,6 @@ var max_health: float = 0.0
 
 var occupied_by_drone: Node = null
 
-# Границы клика для каждого уровня (относительно локальных координат базы)
-# Ключ: уровень базы, Значение: [min_x, max_x, min_z, max_z]
 const CLICK_BOUNDS = {
 	1: [-3.0, 3.0, -3.0, 3.0],
 	2: [-4.0, 4.0, -4.0, 4.0]
@@ -28,13 +26,11 @@ func _ready() -> void:
 	if healthbar:
 		healthbar.init_health(max_health, current_health)
 	
-	# Скрываем (удаляем из дерева) уровни, которые еще не достигнуты, чтобы NavMesh их не учитывал
 	if lvl2:
 		lvl2.get_parent().remove_child(lvl2)
 	if lvl3:
 		lvl3.get_parent().remove_child(lvl3)
 		
-	# Ждем кадр физики (на случай если нужна синхронизация физики для других вещей)
 	await get_tree().physics_frame
 
 func _input(event: InputEvent) -> void:
@@ -54,7 +50,7 @@ func _input(event: InputEvent) -> void:
 			var local_pos = global_transform.affine_inverse() * result.position
 			var level = GameManager.base_level
 			
-			if CLICK_BOUNDS.has(level) or CLICK_BOUNDS.has(2): # Fallback на 2 уровень
+			if CLICK_BOUNDS.has(level) or CLICK_BOUNDS.has(2):
 				var bounds = CLICK_BOUNDS[level] if CLICK_BOUNDS.has(level) else CLICK_BOUNDS[2]
 				if local_pos.x >= bounds[0] and local_pos.x <= bounds[1] and local_pos.z >= bounds[2] and local_pos.z <= bounds[3]:
 					GameManager.toggle_ui("commandcenter")
@@ -77,20 +73,17 @@ func upgrade_base() -> void:
 		GameManager.base_level += 1
 		GameManager.show_alert.emit("Base upgraded to level " + str(GameManager.base_level), GameManager.AlertType.SUCCESS)
 		
-		# Полный отхил при апгрейде
 		if data and GameManager.base_level <= data.level_healths.size():
 			max_health = data.level_healths[GameManager.base_level - 1]
 			current_health = max_health
 			if healthbar:
 				healthbar.init_health(max_health, current_health)
 		
-		# Добавляем в дерево модель нового уровня
 		if GameManager.base_level == 2 and lvl2 and lvl2.get_parent() == null:
 			add_child(lvl2)
 		elif GameManager.base_level == 3 and lvl3 and lvl3.get_parent() == null:
 			add_child(lvl3)
 			
-		# Обновляем навигацию после добавления коллизий
 		await get_tree().physics_frame
 		bake_navmesh()
 	else:

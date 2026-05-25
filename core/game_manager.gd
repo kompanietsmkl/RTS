@@ -1,6 +1,5 @@
 extends Node
 
-# Сигналы для обновления UI и уведомления дронов
 signal credits_changed(new_amount)
 signal energy_distribution_changed(gathering, defense, production)
 signal base_level_changed(new_level, new_max_energy)
@@ -23,7 +22,6 @@ var should_start_directly: bool = false
 var should_load_save: bool = false
 
 func _ready() -> void:
-	# Глобальное первичное запекание навигации при старте игры
 	await get_tree().physics_frame
 	_bake_initial_navmesh()
 
@@ -49,12 +47,10 @@ func toggle_ui(ui_name: String) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		# Клик в пустую область карты (не перехваченный UI или зданиями)
 		if active_ui != "":
 			active_ui = ""
 			close_all_ui.emit()
 
-# Экономика
 var credits: int = 1000:
 	set(value):
 		credits = value
@@ -72,7 +68,6 @@ var total_defenders: int = 0:
 		drones_count_changed.emit(total_gatherers, total_defenders)
 		_emit_drone_limit()
 
-# Статистика базы
 var base_level: int = 1:
 	set(value):
 		base_level = value
@@ -88,12 +83,10 @@ func _emit_drone_limit():
 	var current = total_gatherers + total_defenders + active_production
 	drone_limit_changed.emit(current, max_drones)
 
-# Распределение энергии (приоритеты)
 var energy_gathering: int = 0
 var energy_defense: int = 0
 var energy_production: int = 0
 
-# Текущее количество активных дронов
 var active_gatherers: int = 0
 var active_defenders: int = 0
 var active_production: int = 0:
@@ -125,68 +118,58 @@ func _process(delta: float) -> void:
 				if factory and factory.has_method("spawn_drone"):
 					factory.spawn_drone(unit_data)
 
-# --- ЛОГИКА ЭНЕРГИИ ---
 
-# Возвращает количество нераспределенной энергии
 func get_available_energy() -> int:
 	return max_energy - (energy_gathering + energy_defense + energy_production)
 
-# Попытка установить новую энергию для добычи
 func set_energy_gathering(amount: int) -> bool:
 	if amount < 0: return false
 	
 	var diff = amount - energy_gathering
 	if diff > 0 and get_available_energy() < diff:
-		return false # Не хватает свободной энергии
+		return false
 	
 	energy_gathering = amount
 	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)
 	return true
 
-# Попытка установить новую энергию для защиты
 func set_energy_defense(amount: int) -> bool:
 	if amount < 0: return false
 	
 	var diff = amount - energy_defense
 	if diff > 0 and get_available_energy() < diff:
-		return false # Не хватает свободной энергии
+		return false
 		
 	energy_defense = amount
 	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)
 	return true
 
-# Попытка установить новую энергию для производства
 func set_energy_production(amount: int) -> bool:
 	if amount < 0: return false
 	
 	var diff = amount - energy_production
 	if diff > 0 and get_available_energy() < diff:
-		return false # Не хватает свободной энергии
+		return false
 		
 	energy_production = amount
 	energy_distribution_changed.emit(energy_gathering, energy_defense, energy_production)
 	return true
 
-# --- ЛОГИКА ЭКОНОМИКИ ---
 
-# Конвертация ресурсов в кредиты с бонусом +50% за каждый уровень базы
 func convert_resources_to_credits(resources: float) -> int:
 	var base_credits = resources / 5.0
 	var multiplier = pow(1.7, base_level - 1)
 	return round(base_credits * multiplier)
 
-# Вызывается, когда дрон приносит кристалл на базу
 func add_credits(amount: int):
 	credits += amount
 
-# Безопасная трата кредитов
 func spend_credits(amount: int) -> bool:
 	if credits >= amount:
 		credits -= amount
 		return true
 	return false
 
-# Покупка апгрейда базы
 func upgrade_base(cost: int) -> bool:
 	if spend_credits(cost):
 		base_level += 1
