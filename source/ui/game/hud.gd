@@ -65,7 +65,6 @@ func _on_production_added(id: int, unit_data: UnitData):
 func _on_production_progress(id: int, time_left: float, duration: float):
 	if production_ui_items.has(id):
 		var item = production_ui_items[id]
-		# Вычисляем процент завершения (от 0 до 100)
 		var percent = int(((duration - time_left) / duration) * 100)
 		item.update_progress(percent)
 

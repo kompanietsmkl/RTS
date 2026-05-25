@@ -11,13 +11,11 @@ var target: Node3D = null
 var is_attacking: bool = false
 var time_since_last_attack: float = 0.0
 
-# Переменные для анти-застревания
 var last_position: Vector3 = Vector3.ZERO
 var stuck_timer: float = 0.0
 var unstuck_vector: Vector3 = Vector3.ZERO
 var unstuck_time_left: float = 0.0
 
-# Переменные для случайного блуждания (шума пути)
 var noise_timer: float = 0.0
 var target_noise_angle: float = 0.0
 var current_noise_angle: float = 0.0
@@ -31,7 +29,6 @@ func _ready() -> void:
 	if healthbar:
 		healthbar.init_health(max_health, current_health)
 	
-	# Небольшая задержка, чтобы NavMesh точно был готов
 	await get_tree().create_timer(0.5).timeout
 	find_target()
 
@@ -40,27 +37,23 @@ func _physics_process(delta: float) -> void:
 		target = null
 		find_target()
 		if target == null:
-			# Больше нет зданий для атаки
 			velocity = Vector3.ZERO
 			move_and_slide()
 			return
 			
 	var distance_to_target = global_position.distance_to(target.global_position)
 	
-	# Обновляем случайный шум маршрута
 	noise_timer -= delta
 	if noise_timer <= 0:
 		noise_timer = randf_range(0.5, 2.0)
-		target_noise_angle = randf_range(-0.8, 0.8) # Угол отклонения (радианы)
+		target_noise_angle = randf_range(-0.8, 0.8)
 	current_noise_angle = lerp(current_noise_angle, target_noise_angle, delta * 2.0)
 	
 	if distance_to_target <= attack_range:
-		# Атакуем
 		velocity = Vector3.ZERO
 		is_attacking = true
 		time_since_last_attack += delta
 		
-		# Смотрим на цель
 		var look_pos = target.global_position
 		look_pos.y = global_position.y
 		if global_position.distance_to(look_pos) > 0.1:
@@ -70,7 +63,6 @@ func _physics_process(delta: float) -> void:
 			attack_target()
 			time_since_last_attack = 0.0
 	else:
-		# Двигаемся
 		is_attacking = false
 		time_since_last_attack = 0.0
 		
@@ -89,7 +81,6 @@ func _physics_process(delta: float) -> void:
 				optimal_dir.y = 0
 				optimal_dir = optimal_dir.normalized()
 				
-				# Уменьшаем влияние шума, когда подходим близко к зданию
 				var noise_multiplier = clamp((distance_to_target - attack_range) / 15.0, 0.0, 1.0)
 				var noisy_dir = optimal_dir.rotated(Vector3.UP, current_noise_angle * noise_multiplier)
 				
@@ -100,7 +91,6 @@ func _physics_process(delta: float) -> void:
 					look_pos.y = global_position.y
 					look_at(look_pos, Vector3.UP)
 			else:
-				# Запасной план: бежим прямо к цели, если навигация барахлит
 				var optimal_dir = global_position.direction_to(target.global_position)
 				optimal_dir.y = 0
 				optimal_dir = optimal_dir.normalized()
@@ -117,15 +107,12 @@ func _physics_process(delta: float) -> void:
 				
 			move_and_slide()
 			
-			# Детект застревания
 			if global_position.distance_to(last_position) < speed * delta * 0.3:
 				stuck_timer += delta
 				if stuck_timer > 0.5:
-					# Даем случайный импульс
 					unstuck_vector = Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)).normalized() * speed * 2.0
 					unstuck_time_left = 0.3
 					stuck_timer = 0.0
-					# Пересчитываем путь
 					if target and nav_agent:
 						nav_agent.target_position = target.global_position
 			else:

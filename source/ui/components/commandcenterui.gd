@@ -35,6 +35,6 @@ func _on_upgrade_pressed() -> void:
 		if center and center.has_method("upgrade_base"):
 			center.upgrade_base()
 		else:
-			print("ОШИБКА: CommandCenter не найден для апгрейда!")
+			print("ERROR: CommandCenter not found for upgrade!")
 			
 	update_price()

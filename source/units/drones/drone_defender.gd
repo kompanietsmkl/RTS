@@ -52,14 +52,14 @@ func activate():
 	if not is_active and GameManager.active_defenders < GameManager.energy_defense:
 		is_active = true
 		GameManager.active_defenders += 1
-		print("Защитник: Активирован!")
+		print("Defender: Activated!")
 
 func deactivate():
 	if is_active:
 		is_active = false
 		GameManager.active_defenders -= 1
 		current_target = null
-		print("Защитник: Отключен (нет энергии).")
+		print("Defender: Deactivated (no energy).")
 
 func execute_behavior(delta: float):
 	# Lazy load CommandCenter if it wasn't ready during _ready()
@@ -194,7 +194,7 @@ func patrol_base(delta: float):
 		var bases = get_tree().get_nodes_in_group("commandcenter")
 		if bases.size() > 0:
 			base_building = bases[0]
-			print("Защитник: База найдена во время патрулирования!")
+			print("Defender: Base found during patrol!")
 		else:
 			velocity = Vector3.ZERO
 			return

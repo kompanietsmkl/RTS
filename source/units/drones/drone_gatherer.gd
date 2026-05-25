@@ -40,18 +40,18 @@ func _ready():
 	var bases = get_tree().get_nodes_in_group("commandcenter")
 	if bases.size() > 0:
 		base_building = bases[0]
-		print("Дрон-сборщик: База найдена!")
+		print("Gatherer Drone: Base found!")
 	else:
-		print("Дрон-сборщик: База не найдена при старте, поиск отложен.")
+		print("Gatherer Drone: Base not found on start, delaying search.")
 
 func _on_energy_changed(gathering_energy: int, _defense_energy: int, _production_energy: int):
 	if is_active and GameManager.active_gatherers > gathering_energy:
-		print("Дрон: Энергию урезали, отключаюсь.")
+		print("Drone: Energy cut, deactivating.")
 		deactivate()
 
 func activate():
 	if not is_active and GameManager.active_gatherers < GameManager.energy_gathering:
-		print("Дрон: Получил энергию, активируюсь!")
+		print("Drone: Energy received, activating!")
 		is_active = true
 		GameManager.active_gatherers += 1
 		find_new_crystal()
@@ -91,7 +91,7 @@ func execute_behavior(delta: float):
 			var dist = global_position.distance_to(target_crystal.global_position)
 			if dist <= interact_range:
 				velocity = Vector3.ZERO
-				print("Дрон: Доехал до кристалла. Начинаю добычу!")
+				print("Drone: Reached crystal. Starting to gather!")
 				current_state = State.GATHERING
 			else:
 				move_to_target(target_crystal.global_position, delta)
@@ -113,9 +113,8 @@ func execute_behavior(delta: float):
 				
 			current_resources += gathered
 			
-			# Если заполнили инвентарь или кристалл иссяк (с учетом погрешности float)
 			if current_resources >= max_capacity or target_crystal.current_resources <= 0.01:
-				print("Дрон: Ресурсы собраны, возвращаюсь!")
+				print("Drone: Resources gathered, returning!")
 				release_crystal()
 				current_state = State.RETURNING_TO_BASE
 				
@@ -126,7 +125,7 @@ func execute_behavior(delta: float):
 			velocity = Vector3.ZERO
 			if is_instance_valid(base_building) and get_base_occupant() == null:
 				base_building.set_meta("occupied_by_drone", self)
-				print("Дрон: База освободилась, начинаю разгрузку!")
+				print("Drone: Base is free, starting to unload!")
 				current_state = State.UNLOADING
 				unload_timer = unload_time
 			
@@ -135,9 +134,9 @@ func execute_behavior(delta: float):
 			unload_timer -= delta
 			if unload_timer <= 0:
 				var credits_earned = GameManager.convert_resources_to_credits(current_resources)
-				print("Дрон: Разгрузился на базе! Жду кулдаун. Заработано кредитов: ", credits_earned)
+				print("Drone: Unloaded at base! Waiting cooldown. Credits earned: ", credits_earned)
 				GameManager.add_credits(credits_earned)
-				print("Всего кредитов: ", GameManager.credits)
+				print("Total credits: ", GameManager.credits)
 				current_resources = 0.0
 				
 				if is_instance_valid(base_building) and get_base_occupant() == self:
@@ -146,7 +145,7 @@ func execute_behavior(delta: float):
 				if is_active:
 					find_new_crystal()
 				else:
-					print("Дрон: Засыпаю на базе.")
+					print("Drone: Sleeping at base.")
 					current_state = State.IDLE
 
 func find_new_crystal():
@@ -160,7 +159,7 @@ func find_new_crystal():
 			
 	if available_crystals.size() == 0:
 		if Engine.get_process_frames() % 60 == 0:
-			print("Дрон: Ищу кристаллы, но свободных нет!")
+			print("Drone: Searching for crystals, but none are free!")
 		current_state = State.IDLE
 		return
 		
@@ -176,7 +175,7 @@ func find_new_crystal():
 	target_crystal = nearest
 	target_crystal.occupied_by_drone = self
 	current_state = State.MOVING_TO_CRYSTAL
-	print("Дрон: Занял свободный кристалл на дистанции: ", min_dist)
+	print("Drone: Claimed free crystal at distance: ", min_dist)
 
 func return_to_base(delta: float):
 	if not is_instance_valid(base_building):
@@ -193,18 +192,18 @@ func return_to_base(delta: float):
 			var occupant = get_base_occupant()
 			if occupant == null or occupant == self:
 				base_building.set_meta("occupied_by_drone", self)
-				print("Дрон: Приехал на базу, начинаю разгрузку и отдых...")
+				print("Drone: Arrived at base, starting to unload and rest...")
 				current_state = State.UNLOADING
 				unload_timer = unload_time
 			else:
 				if current_state != State.WAITING_TO_UNLOAD:
-					print("Дрон: База занята, жду очереди на разгрузку...")
+					print("Drone: Base is occupied, waiting in queue to unload...")
 					current_state = State.WAITING_TO_UNLOAD
 		else:
 			if is_active:
 				find_new_crystal()
 			else:
-				print("Дрон: Засыпаю на базе.")
+				print("Drone: Sleeping at base.")
 				current_state = State.IDLE
 	else:
 		move_to_target(base_building.global_position, delta)
