@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UnitData" format=3 uid="uid://cx628qwpy0l1y"]
+
+[ext_resource type="Script" uid="uid://b2wpvj4wjceed" path="res://source/resources/unit_data.gd" id="1_unit"]
+[ext_resource type="Texture2D" uid="uid://cq5npiccctg4m" path="res://assets/icons/defender.png" id="2_icon"]
+[ext_resource type="PackedScene" uid="uid://66pbi1uqcc83" path="res://source/units/drones/drone_defender.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_unit")
+unit_id = "defender"
+display_name = "Defender"
+cost = 150
+health = 100
+build_time = 30.0
+icon = ExtResource("2_icon")
+unit_scene = ExtResource("3_scene")

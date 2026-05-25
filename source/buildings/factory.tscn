@@ -752,9 +752,6 @@ shape = SubResource("ConvexPolygonShape3D_nvw3j")
 transform = Transform3D(1.055, 0, 0, 0, 1.055, 0, 0, 0, 1.055, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nvw3j")
 
-[node name="Healthbar" parent="FactoryLVL1" unique_id=104868348 instance=ExtResource("1_qo3su")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
 [node name="FactoryLVL2" type="StaticBody3D" parent="." unique_id=1063786187]
 transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 2.625, 0, -3.5)
 collision_layer = 2
@@ -823,5 +820,8 @@ shape = SubResource("ConvexPolygonShape3D_veda8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FactoryLVL3/Area3D" unique_id=754198486]
 transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_veda8")
+
+[node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("1_qo3su")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [connection signal="input_event" from="Click" to="." method="_on_click_input_event"]

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://3w6c8dxx08kn"]
+
+[ext_resource type="Script" uid="uid://dnvt6gjuakir2" path="res://source/ui/components/gameover.gd" id="1_v46o1"]
+[ext_resource type="Shader" uid="uid://hsk1dapfirqu" path="res://source/ui/menu/blur.gdshader" id="1_yod8c"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="2_v46o1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fuwko"]
+shader = ExtResource("1_yod8c")
+shader_parameter/blur_amount = 2.5
+shader_parameter/mix_amount = 0.50000002375
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jg6yj"]
+line_spacing = 0.0
+font = ExtResource("2_v46o1")
+font_size = 72
+font_color = Color(1, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_offset = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1515012303]
+script = ExtResource("1_v46o1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1920229821]
+material = SubResource("ShaderMaterial_fuwko")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2009122554]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="Label" parent="CenterContainer" unique_id=1000285408]
+layout_mode = 2
+text = "game over"
+label_settings = SubResource("LabelSettings_jg6yj")

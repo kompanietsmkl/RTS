@@ -1,40 +1,35 @@
 extends Node3D
 
+@export var data: BuildingData = preload("res://source/resources/factory_data.tres")
 @export var factory_cost: int = 100
 var is_built: bool = false
 var current_level: int = 0
+var current_health: float = 0.0
+var max_health: float = 0.0
+@onready var healthbar = $Healthbar if has_node("Healthbar") else null
 
-const GathererScene = preload("res://source/units/drones/drone_gatherer.tscn")
-const DefenderScene = preload("res://source/units/drones/drone_defender.tscn")
-
-func spawn_drone(type: String):
-	var drone_scene: PackedScene = null
-	if type == "gatherer":
-		drone_scene = GathererScene
-	elif type == "defender":
-		drone_scene = DefenderScene
-		
-	if not drone_scene:
-		print("Неизвестный тип дрона:", type)
+func spawn_drone(unit_data: UnitData):
+	if not unit_data or not unit_data.unit_scene:
+		print("Ошибка спавна: не передан UnitData или отсутствует unit_scene")
 		return
 		
-	var drone_instance = drone_scene.instantiate()
+	var drone_instance = unit_data.unit_scene.instantiate()
 	
-	# Генерируем случайную позицию в радиусе 5-10 метров
-	var angle = randf() * TAU
-	var dist = randf_range(5.0, 10.0)
-	var random_offset = Vector3(cos(angle), 0, sin(angle)) * dist
-	var target_pos = global_position + random_offset
+	# Устанавливаем фиксированную точку спавна (условно "перед дверью" фабрики)
+	# Учитываем текущий поворот фабрики
+	var spawn_offset = Vector3(0, 0.5, 5.0) # 5 метров вперед по локальной оси Z, немного приподнято
+	var base_spawn_pos = global_transform * spawn_offset
 	
-	# Безопасная точка на NavMesh
-	var safe_pos = NavigationServer3D.map_get_closest_point(get_world_3d().navigation_map, target_pos)
+	# Добавляем небольшой случайный разброс, чтобы дроны не появлялись друг в друге
+	var random_x = randf_range(-2.0, 2.0)
+	var random_z = randf_range(-2.0, 2.0)
+	var spawn_pos = base_spawn_pos + Vector3(random_x, 0, random_z)
 	
-	# Спавним в корне сцены (сначала добавляем в дерево, потом ставим глобальные координаты)
+	# Спавним в корне сцены
 	get_tree().current_scene.add_child(drone_instance)
-	drone_instance.global_position = safe_pos
-	print("Фабрика: Дрон ", type, " заспавнен!")
+	drone_instance.global_position = spawn_pos
 
-
+	print("Фабрика: Дрон ", unit_data.display_name, " заспавнен!")
 
 @onready var lvl1 = $"FactoryLVL1"
 @onready var lvl2 = $"FactoryLVL2"
@@ -64,6 +59,14 @@ func update_click_zone():
 		click_shape.position = CLICK_OFFSETS[current_level]
 
 func _ready() -> void:
+	add_to_group("factory")
+	
+	if data and data.level_healths.size() > 0:
+		max_health = data.level_healths[0]
+		current_health = max_health
+	if healthbar:
+		healthbar.init_health(max_health, current_health)
+		
 	# Убираем невидимые уровни из дерева — тогда NavMesh их не увидит
 	if lvl1:
 		lvl1.get_parent().remove_child(lvl1)
@@ -73,7 +76,6 @@ func _ready() -> void:
 		lvl3.get_parent().remove_child(lvl3)
 
 	await get_tree().physics_frame
-	bake_navmesh()
 	update_click_zone()
 		
 func buy_factory():
@@ -99,36 +101,89 @@ func bake_navmesh():
 	else:
 		print("ВНИМАНИЕ: Не удалось найти NavigationRegion3D для запекания!")
 
+func take_damage(amount: float) -> void:
+	if not is_built: return
+	current_health -= amount
+	if healthbar:
+		healthbar.update_health(current_health)
+	if current_health <= 0:
+		print("Factory destroyed!")
+		queue_free()
+
+
+func get_upgrade_cost() -> int:
+	if data and current_level < data.level_costs.size():
+		return data.level_costs[current_level]
+	return -1 # MAX
 
 func upgrade_factory():
-	if current_level == 1:
-		var cost = 200
-		if GameManager.spend_credits(cost):
-			print("Фабрика улучшена до 2 уровня за ", cost, " кредитов!")
+	var cost = get_upgrade_cost()
+	if cost <= 0:
+		GameManager.show_alert.emit("Factory is already at maximum level!", GameManager.AlertType.WARNING)
+		return
+		
+	if GameManager.spend_credits(cost):
+		GameManager.show_alert.emit("Factory upgraded to level " + str(current_level + 1) + "!", GameManager.AlertType.SUCCESS)
+		current_level += 1
+		
+		# Добавляем нужную модель
+		if current_level == 2 and lvl2 and lvl2.get_parent() == null:
 			add_child(lvl2)
-			current_level = 2
-			update_click_zone()
-			await get_tree().physics_frame
-			bake_navmesh()
-		else:
-			print("Не хватает кредитов для апгрейда до 2 уровня! Нужно ", cost, ", а есть ", GameManager.credits)
-	elif current_level == 2:
-		var cost = 350
-		if GameManager.spend_credits(cost):
-			print("Фабрика улучшена до 3 уровня за ", cost, " кредитов!")
+		elif current_level == 3 and lvl3 and lvl3.get_parent() == null:
 			add_child(lvl3)
-			current_level = 3
-			update_click_zone()
-			await get_tree().physics_frame
-			bake_navmesh()
-		else:
-			print("Не хватает кредитов для апгрейда до 3 уровня! Нужно ", cost, ", а есть ", GameManager.credits)
+			
+		update_click_zone()
+		
+		# Полный отхил при апгрейде
+		if data and current_level <= data.level_healths.size():
+			max_health = data.level_healths[current_level - 1]
+			current_health = max_health
+			if healthbar:
+				healthbar.init_health(max_health, current_health)
+				
+		await get_tree().physics_frame
+		bake_navmesh()
 	else:
-		print("Фабрика уже максимального уровня!")
+		GameManager.show_alert.emit("Not enough credits to upgrade factory!", GameManager.AlertType.ERROR)
 
 func _on_click_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if not is_built:
 			buy_factory()
+			get_viewport().set_input_as_handled()
 		else:
-			GameManager.toggle_factory_ui.emit()
+			# Click on an already built factory
+			GameManager.toggle_ui("factory")
+			get_viewport().set_input_as_handled()
+
+func load_state(built: bool, level: int, health: float) -> void:
+	is_built = built
+	current_level = level
+	
+	# First hide/remove lvl1, lvl2, lvl3 if they exist in the tree
+	if lvl1 and lvl1.get_parent() == self:
+		remove_child(lvl1)
+	if lvl2 and lvl2.get_parent() == self:
+		remove_child(lvl2)
+	if lvl3 and lvl3.get_parent() == self:
+		remove_child(lvl3)
+		
+	if is_built:
+		if current_level >= 1 and lvl1 and lvl1.get_parent() == null:
+			add_child(lvl1)
+		if current_level >= 2 and lvl2 and lvl2.get_parent() == null:
+			add_child(lvl2)
+		if current_level >= 3 and lvl3 and lvl3.get_parent() == null:
+			add_child(lvl3)
+			
+	update_click_zone()
+	
+	if data and current_level <= data.level_healths.size() and current_level > 0:
+		max_health = data.level_healths[current_level - 1]
+	else:
+		if data and data.level_healths.size() > 0:
+			max_health = data.level_healths[0]
+			
+	current_health = health
+	if healthbar:
+		healthbar.init_health(max_health, current_health)

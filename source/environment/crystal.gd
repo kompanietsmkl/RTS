@@ -1,7 +1,7 @@
 extends StaticBody3D
 var rng = RandomNumberGenerator.new()
 
-@export var max_resources: float = 50.0
+@export var max_resources: float = 100.0
 var current_resources: float = max_resources
 var occupied_by_drone: Node = null
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://caxkcrks3glep" path="res://source/units/drones/drone_gatherer.gd" id="1_gifhn"]
 [ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/components/healthbar.tscn" id="1_ydl72"]
-[ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlight_ring.tscn" id="3_l6ifc"]
+[ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlightring.tscn" id="3_l6ifc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rkor"]
 resource_name = "dark"
@@ -128,9 +128,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sayuh")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ydl72"]
-height = 0.65
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l6ifc"]
 radius = 0.4
+height = 1.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1771977173]
 collision_mask = 3
@@ -145,10 +145,13 @@ avoidance_enabled = true
 radius = 0.6
 
 [node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("1_ydl72")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1736335755]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.49609375, 0)
-shape = SubResource("CylinderShape3D_ydl72")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="HighlightRing" parent="." unique_id=102306017 instance=ExtResource("3_l6ifc")]
+visible = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1046387196]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.8, 0.2)
+shape = SubResource("CapsuleShape3D_l6ifc")
+
+[editable path="HighlightRing"]

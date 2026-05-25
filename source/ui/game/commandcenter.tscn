@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cq2yga28sykx0"]
+
+[ext_resource type="PackedScene" uid="uid://b14a7m7h12lix" path="res://source/ui/components/commandcenterui.tscn" id="1_eu4wp"]
+[ext_resource type="Script" uid="uid://bssdfruebit0r" path="res://source/ui/game/commandcenter.gd" id="1_nnmeb"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1091109551]
+script = ExtResource("1_nnmeb")
+metadata/_edit_horizontal_guides_ = [610.0]
+
+[node name="Button" parent="." unique_id=1601488180 instance=ExtResource("1_eu4wp")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -98.0
+offset_right = 30.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(30, 30)

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3 uid="uid://d3n1k7xc3a0jx"]
+
+[ext_resource type="Script" uid="uid://bnwf4m10uywrs" path="res://source/resources/building_data.gd" id="1_bd"]
+
+[resource]
+script = ExtResource("1_bd")
+building_id = "factory"
+display_name = "Factory"
+level_costs = Array[int]([0, 200, 350])
+level_healths = Array[float]([250.0, 400.0, 500.0])

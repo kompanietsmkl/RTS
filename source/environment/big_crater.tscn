@@ -1,0 +1,261 @@
+[gd_scene format=4 uid="uid://bvt3vrdw0705n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wajm6"]
+resource_name = "rock"
+albedo_color = Color(0.9592555, 0.7468624, 0.65628237, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7n5x"]
+resource_name = "rockDark"
+albedo_color = Color(0.8532437, 0.6441637, 0.5494939, 1)
+metallic = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_irxgq"]
+_surfaces = [{
+"aabb": AABB(-3.609557e-16, -1.2785591e-18, -0.5, 0.5, 0.5, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAGAAcA"),
+"name": "rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAAAAP////8AAAAA////vwAA/3/////fAAD//////78AAP//AAAAAAAA/38AAP8fAAAAAAAAAAAAAA==")
+}, {
+"aabb": AABB(0, -1.2785591e-18, -0.5, 0.5, 0.5, 0.875),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAAAAQABQACAAEAAQAEAAYAAQAHAAUABwABAAYABgAIAAcA"),
+"name": "rockDark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("/////0iSAAD/f///2rYAAP9/AACSJAAA//8AAAAAAAD/////bNsAAAAAAAAAAAAA/3//////AAAAAP//SJIAAAAA//9s2wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cnnj5"]
+resource_name = "terrain_sideCliff_Mesh terrain_sideCliff"
+_surfaces = [{
+"aabb": AABB(-3.609557e-16, -1.2785591e-18, -0.5, 0.5, 0.5, 1),
+"attribute_data": PackedByteArray("//////9/////fxfD/7+L4f//F8P//2AM/7/UKv9/YAw="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAGAAcA"),
+"material": SubResource("StandardMaterial3D_wajm6"),
+"name": "rock",
+"primitive": 3,
+"uv_scale": Vector4(39.37008, 41.37008, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////////78AAP//////vwAA////v/+//3/////f/7///////7//v///AAAAAP+//38AAP8f/78AAAAAAAD/v////3////9/////f////3////9/////f////3////9/")
+}, {
+"aabb": AABB(0, -1.2785591e-18, -0.5, 0.5, 0.5, 0.875),
+"attribute_data": PackedByteArray("qioAAP9fAABVNf2sAAD9rKpKcSb/f3Emqqpu01R1btOzr0Dn/38Ex/9/jIazr8imZt8Ex2bfjIY="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgACwAMAAgACwANAAwA"),
+"material": SubResource("StandardMaterial3D_r7n5x"),
+"name": "rockDark",
+"primitive": 3,
+"uv_scale": Vector4(52.820503, 39.082615, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("/////0iSXu7/f///2rZe7v9/AACSJF7u//8AAAAAXu7/f///2rZe7gAA//9Ikl7uAAAAAAAAXu7/fwAAkiRe7v9///////+/AAD//2zb/78AAP//SJL/v/9////atv+//////2zb/7//////SJL/v9aH8dbWh/HW1ofx1taH8dYMqdcHDKnXBwyp1wcMqdcH////f////3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_irxgq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr2q7"]
+resource_name = "rock"
+albedo_color = Color(0.9592555, 0.7468624, 0.65628237, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfsm7"]
+resource_name = "rockDark"
+albedo_color = Color(0.8532437, 0.6441637, 0.5494939, 1)
+metallic = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7x2bk"]
+_surfaces = [{
+"aabb": AABB(0, 0, -1, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"name": "rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/78AAP8/AAAAAAAAAAAAAP//AAAAAAAA//8AAP//AAD/P/////8AAAAA/////wAAAAD///+/AAD/L////88AAA==")
+}, {
+"aabb": AABB(0, 0, -1, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgAEAAAAAgAFAAQAAwAGAAIAAgAHAAUABwACAAYABgAIAAcA"),
+"name": "rockDark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("AAD///+/AAAAAP///38AAP9f////nwAAAAAAAAAAAAD/L////88AAP8//////wAA/78AAP8/AAD/f/////8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6yfh4"]
+resource_name = "terrain_sideCorner_Mesh terrain_sideCorner"
+_surfaces = [{
+"aabb": AABB(0, 0, -1, 1, 0.5, 1),
+"attribute_data": PackedByteArray("/9/VIP9/AAD//wAA//9Vg/+fVYP/f1WD/3+AYv+XtWo="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"material": SubResource("StandardMaterial3D_sr2q7"),
+"name": "rock",
+"primitive": 3,
+"uv_scale": Vector4(78.74016, 76.74016, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/78AAP8//78AAAAAAAD/v///AAAAAP+///8AAP///7//P///////vwAA//////+/AAD///+//7//L////8//v////3////9/////f////3////9/////f////3////9/")
+}, {
+"aabb": AABB(0, 0, -1, 1, 0.5, 1),
+"attribute_data": PackedByteArray("/3+dVf9/cSb/3wc+/69pYf+/yoT//8qESEPyfXmo8n3z0P//kQb//4VX8n22vPJ9bfn//wsv//8="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgAFAAQABgAHAAgACAAJAAYACgALAAwADAANAAoA"),
+"material": SubResource("StandardMaterial3D_hfsm7"),
+"name": "rockDark",
+"primitive": 3,
+"uv_scale": Vector4(39.37008, 53.4117, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAD///+//78AAP///3//v/9f////n/+//y/////P/7//P///////v/9///////+//1////+f0/MAAP///3/T8wAAAAAAANPz/78AAP8/0/P/f/////820f9f////nzbR/78AAP8/NtH//wAA//820f///3////9/////f////3////9/////f4qoqQWKqKkFiqipBYqoqQUYtNIVGLTSFRi00hUYtNIV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7x2bk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjhm1"]
+resource_name = "rockDark"
+albedo_color = Color(0.8532437, 0.6441637, 0.5494939, 1)
+metallic = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly255"]
+resource_name = "rock"
+albedo_color = Color(0.9592555, 0.7468624, 0.65628237, 1)
+metallic = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u6c3l"]
+_surfaces = [{
+"aabb": AABB(0.25000003, 0, -1, 0.75, 0.5, 0.75),
+"format": 34896613377,
+"index_count": 15,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAgAEAAMAAAADAAUABQAGAAAA"),
+"name": "rockDark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray("VFX//wAAAAD//wAAAAAAAP////+qqgAAKdX//5TqAAD///////8AAAMV//9HKgAAAAD//wAAAAA=")
+}, {
+"aabb": AABB(0, 0.5, -1, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 15,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAwAFAAAABQAGAAAA"),
+"name": "rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray("//8AAP//AAAAAAAA//8AAAAAAAAAAAAAwk8AALUfAAD/PwAAAAAAAN7fAADvrwAA//8AAP+/AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f38bq"]
+resource_name = "terrain_sideCornerInner_Mesh terrain_sideCornerInner"
+_surfaces = [{
+"aabb": AABB(0.25000003, 0, -1, 0.75, 0.5, 0.75),
+"attribute_data": PackedByteArray("QK0knv9/ke6+UiSe4KdEEP+fAAD/vwAA7u9CWv//qkH//4Bi"),
+"format": 34896613399,
+"index_count": 15,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABQAGAAMABQAHAAYABwAIAAYA"),
+"material": SubResource("StandardMaterial3D_rjhm1"),
+"name": "rockDark",
+"primitive": 3,
+"uv_scale": Vector4(78.74016, 76.74016, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("VFX//wAAk+H//wAAAACT4f////+qqpPhAxX//0cq/78AAP//AAD/v1RV//8AAP+/KdX//5Tq/7//////qqr/v/////////+/sKegC7CnoAuwp6AL////f////3////9/////f////3////9/")
+}, {
+"aabb": AABB(0, 0.5, -1, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("//9Vg/9/VYP/fwAA4KdEEP+fAADu70Ja//+AYg=="),
+"format": 34896613399,
+"index_count": 15,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAwAFAAAABQAGAAAA"),
+"material": SubResource("StandardMaterial3D_ly255"),
+"name": "rock",
+"primitive": 3,
+"uv_scale": Vector4(78.74016, 76.74016, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray("//8AAP///78AAAAA////vwAAAAAAAP+/wk8AALUf/7//PwAAAAD/v97fAADvr/+///8AAP+//7////9/////f////3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u6c3l")
+
+[node name="BigCrater" type="Node3D" unique_id=43962320]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1520833701]
+
+[node name="terrain_sideCliff" type="MeshInstance3D" parent="StaticBody3D" unique_id=785695387]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCliff4" type="MeshInstance3D" parent="StaticBody3D" unique_id=1485821395]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.5)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCliff2" type="MeshInstance3D" parent="StaticBody3D" unique_id=965652514]
+transform = Transform3D(-8.742278e-08, 0, -1, 0, 1, 0, 2, 0, -4.371139e-08, 2.5, 0, 1)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCliff3" type="MeshInstance3D" parent="StaticBody3D" unique_id=1232340566]
+transform = Transform3D(-8.742278e-08, 0, -1, 0, 1, 0, 2, 0, -4.371139e-08, 2.5, 0, 2)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCorner" type="MeshInstance3D" parent="StaticBody3D" unique_id=1827328196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+mesh = SubResource("ArrayMesh_6yfh4")
+
+[node name="terrain_sideCorner3" type="MeshInstance3D" parent="StaticBody3D" unique_id=12358997]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.9604645e-08, 0, 1)
+mesh = SubResource("ArrayMesh_6yfh4")
+
+[node name="terrain_sideCliff5" type="MeshInstance3D" parent="StaticBody3D" unique_id=1246971511]
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -2, 0, -4.371139e-08, -0.5, 0, 3)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCliff6" type="MeshInstance3D" parent="StaticBody3D" unique_id=608974162]
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -2, 0, -4.371139e-08, -0.5, 0, 2)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCorner4" type="MeshInstance3D" parent="StaticBody3D" unique_id=109873388]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 3)
+mesh = SubResource("ArrayMesh_6yfh4")
+
+[node name="terrain_sideCliff7" type="MeshInstance3D" parent="StaticBody3D" unique_id=1084417558]
+transform = Transform3D(-2, 0, -8.742278e-08, 0, 1, 0, 1.7484555e-07, 0, -1, 2, 0, 3.5)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCliff8" type="MeshInstance3D" parent="StaticBody3D" unique_id=540081738]
+transform = Transform3D(-2, 0, -8.742278e-08, 0, 1, 0, 1.7484555e-07, 0, -1, 1, 0, 3.5)
+mesh = SubResource("ArrayMesh_cnnj5")
+
+[node name="terrain_sideCorner5" type="MeshInstance3D" parent="StaticBody3D" unique_id=1924319349]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 2, 0, 3)
+mesh = SubResource("ArrayMesh_6yfh4")
+
+[node name="terrain_sideCornerInner" type="MeshInstance3D" parent="StaticBody3D" unique_id=1648717249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+mesh = SubResource("ArrayMesh_f38bq")
+
+[node name="terrain_sideCornerInner2" type="MeshInstance3D" parent="StaticBody3D" unique_id=1020802746]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 0, 3)
+mesh = SubResource("ArrayMesh_f38bq")
+
+[node name="terrain_sideCornerInner3" type="MeshInstance3D" parent="StaticBody3D" unique_id=386013712]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 2, 0, 1)
+mesh = SubResource("ArrayMesh_f38bq")
+
+[node name="terrain_sideCornerInner4" type="MeshInstance3D" parent="StaticBody3D" unique_id=739213680]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 1)
+mesh = SubResource("ArrayMesh_f38bq")

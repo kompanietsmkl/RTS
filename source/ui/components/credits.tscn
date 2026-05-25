@@ -2,16 +2,13 @@
 
 [ext_resource type="Script" uid="uid://7ldbm85ureyk" path="res://source/ui/components/credits.gd" id="1_4eslh"]
 [ext_resource type="Texture2D" uid="uid://du0t7r60vta5b" path="res://assets/textures/ui-pack/panel_rectangle.png" id="1_vusr6"]
-[ext_resource type="FontFile" uid="uid://ddbkqmwtxg65k" path="res://assets/fonts/Kenney Future Narrow.ttf" id="2_4eslh"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_1605t"]
-font = ExtResource("2_4eslh")
-font_size = 20
+[ext_resource type="LabelSettings" uid="uid://d0rx8mqh45rrs" path="res://assets/fonts/Auire/aquire_label_settings.tres" id="3_4eslh"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="4_1605t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ocrs4"]
-font = ExtResource("2_4eslh")
-font_size = 20
-font_color = Color(1, 0.83137256, 0.16862746, 1)
+font = ExtResource("4_1605t")
+font_size = 21
+font_color = Color(1, 0.8352941, 0.20392157, 1)
 
 [node name="Credits" type="Control" unique_id=765612719]
 layout_mode = 3
@@ -24,7 +21,7 @@ script = ExtResource("1_4eslh")
 
 [node name="Box" type="NinePatchRect" parent="." unique_id=689555479]
 layout_mode = 0
-offset_right = 200.0
+offset_right = 210.0
 offset_bottom = 30.0
 texture = ExtResource("1_vusr6")
 
@@ -35,12 +32,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -78.5
-offset_top = -11.5
-offset_right = 78.5
-offset_bottom = 11.5
+offset_left = -94.0
+offset_top = -16.0
+offset_right = 105.0
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(73, 17)
 
 [node name="Header" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=544639300]
 layout_mode = 2
@@ -48,10 +46,11 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Box/VBoxContainer/Header" unique_id=507647310]
 layout_mode = 2
 text = "credits:"
-label_settings = SubResource("LabelSettings_1605t")
+label_settings = ExtResource("3_4eslh")
 
 [node name="CreditsLabel" type="Label" parent="Box/VBoxContainer/Header" unique_id=879631935]
 layout_mode = 2
 text = "1.2k"
 label_settings = SubResource("LabelSettings_ocrs4")
 horizontal_alignment = 2
+vertical_alignment = 3

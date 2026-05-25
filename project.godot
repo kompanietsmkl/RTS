@@ -14,13 +14,18 @@ config/name="ARES"
 run/main_scene="uid://ypp05q53vvi1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
+
 [autoload]
 
 GameManager="*res://core/game_manager.gd"
+SoundManager="*res://core/sound_manager.gd"
 
 [display]
 
-mouse_cursor/custom_image="uid://dkuq02u56o8qb"
+mouse_cursor/custom_image="uid://dyw62e36t5pwf"
 
 [navigation]
 
@@ -35,3 +40,4 @@ mouse_cursor/custom_image="uid://dkuq02u56o8qb"
 
 rendering_device/driver.windows="d3d12"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+anti_aliasing/quality/use_taa=true

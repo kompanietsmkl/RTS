@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bkn8olvrncj0t"]
+
+[ext_resource type="Texture2D" uid="uid://l7qweompjt0w" path="res://assets/textures/highlight/highlight.png" id="1_oosom"]
+
+[node name="HighlightRing" type="Node3D" unique_id=102306017]
+
+[node name="Highlight" type="Decal" parent="." unique_id=1954896522]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("1_oosom")
+upper_fade = 0.0005100881
+lower_fade = 0.000721373

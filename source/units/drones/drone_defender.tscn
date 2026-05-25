@@ -1,7 +1,8 @@
 [gd_scene format=4 uid="uid://66pbi1uqcc83"]
 
 [ext_resource type="PackedScene" uid="uid://dlf2gtxyg4oth" path="res://source/ui/components/healthbar.tscn" id="1_5y343"]
-[ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlight_ring.tscn" id="2_dpcek"]
+[ext_resource type="Script" uid="uid://6l18q1srlxp3" path="res://source/units/drones/drone_defender.gd" id="1_6dhwr"]
+[ext_resource type="PackedScene" uid="uid://bkn8olvrncj0t" path="res://source/components/highlightring.tscn" id="2_dpcek"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s4t8"]
 resource_name = "metal"
@@ -127,11 +128,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hybjp")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ydl72"]
-height = 0.65
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6dhwr"]
 radius = 0.4
+height = 1.0
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1771977173]
+script = ExtResource("1_6dhwr")
 
 [node name="craft_speederD" type="MeshInstance3D" parent="." unique_id=2135814321]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1, 0)
@@ -142,10 +144,11 @@ avoidance_enabled = true
 radius = 0.6
 
 [node name="Healthbar" parent="." unique_id=104868348 instance=ExtResource("1_5y343")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1736335755]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.49609375, 0)
-shape = SubResource("CylinderShape3D_ydl72")
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_6dhwr")
 
 [node name="HighlightRing" parent="." unique_id=102306017 instance=ExtResource("2_dpcek")]
+visible = false

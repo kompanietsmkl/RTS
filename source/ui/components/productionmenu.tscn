@@ -3,11 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://buke7hgv0udl3" path="res://assets/icons/gatherer.png" id="1_77q4g"]
 [ext_resource type="Script" uid="uid://cwi434x22s02n" path="res://source/ui/components/productionmenu.gd" id="1_ue33a"]
 [ext_resource type="Texture2D" uid="uid://cq5npiccctg4m" path="res://assets/icons/defender.png" id="2_ue33a"]
-[ext_resource type="Texture2D" uid="uid://bbbgf5turop72" path="res://assets/icons/upgrade.jpg" id="4_egomt"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="3_tucv8"]
+[ext_resource type="Texture2D" uid="uid://dmr3enlnm65jw" path="res://assets/icons/upgrade.png" id="4_egomt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2h7bk"]
+font = ExtResource("3_tucv8")
+font_size = 20
 
 [node name="GridContainer" type="GridContainer" unique_id=1407816926]
-offset_right = 120.0
-offset_bottom = 40.0
+offset_right = 188.0
+offset_bottom = 60.0
 columns = 3
 script = ExtResource("1_ue33a")
 
@@ -21,8 +26,23 @@ text = "D"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_77q4g")
 expand_mode = 2
+
+[node name="Price" type="Label" parent="GathererProd" unique_id=2039019708]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_top = -20.0
+offset_right = 17.0
+grow_horizontal = 2
+text = "100"
+label_settings = SubResource("LabelSettings_2h7bk")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DefenderProd" type="Button" parent="." unique_id=794014321]
 layout_mode = 2
@@ -34,18 +54,47 @@ text = "G"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_ue33a")
 expand_mode = 2
+
+[node name="Price" type="Label" parent="DefenderProd" unique_id=1220977233]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_top = -20.0
+offset_right = 17.0
+grow_horizontal = 2
+text = "100"
+label_settings = SubResource("LabelSettings_2h7bk")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Upgrade" type="Button" parent="." unique_id=1439557355]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "U"
 
 [node name="Upgrade" type="TextureRect" parent="Upgrade" unique_id=1839786691]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_egomt")
 expand_mode = 2
+
+[node name="Price" type="Label" parent="Upgrade" unique_id=1205747025]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_top = -20.0
+offset_right = 17.0
+grow_horizontal = 2
+text = "100"
+label_settings = SubResource("LabelSettings_2h7bk")
+horizontal_alignment = 1
+vertical_alignment = 1

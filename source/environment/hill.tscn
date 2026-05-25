@@ -12,7 +12,7 @@ resource_name = "rockDark"
 albedo_color = Color(0.8532437, 0.6441637, 0.5494939, 1)
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_irxgq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7b1cc"]
 _surfaces = [{
 "aabb": AABB(-3.609557e-16, -1.2785591e-18, -0.5, 0.5, 0.5, 1),
 "format": 34896613377,
@@ -64,7 +64,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("/////0iSXu7/f///2rZe7v9/AACSJF7u//8AAAAAXu7/f///2rZe7gAA//9Ikl7uAAAAAAAAXu7/fwAAkiRe7v9///////+/AAD//2zb/78AAP//SJL/v/9////atv+//////2zb/7//////SJL/v9aH8dbWh/HW1ofx1taH8dYMqdcHDKnXBwyp1wcMqdcH////f////3////9/////f////3////9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_irxgq")
+shadow_mesh = SubResource("ArrayMesh_7b1cc")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wjqqm"]
 points = PackedVector3Array(0.5, 0.5, 0.5, -3.609557e-16, 0.5, 0.5, 0.24995106, -1.2785591e-18, -0.37509787, 0.5, -1.2785591e-18, -0.5, 0.5, 0.5, -9.787083e-05, -3.609557e-16, 0.5, -9.787083e-05, -3.609557e-16, -1.2785591e-18, -0.5)
@@ -85,7 +85,7 @@ resource_name = "rockDark"
 albedo_color = Color(0.8532437, 0.6441637, 0.5494939, 1)
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_7x2bk"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wjqqm"]
 _surfaces = [{
 "aabb": AABB(0, 0, -1, 1, 0.5, 1),
 "format": 34896613377,
@@ -137,7 +137,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAD///+//78AAP///3//v/9f////n/+//y/////P/7//P///////v/9///////+//1////+f0/MAAP///3/T8wAAAAAAANPz/78AAP8/0/P/f/////820f9f////nzbR/78AAP8/NtH//wAA//820f///3////9/////f////3////9/////f4qoqQWKqKkFiqipBYqoqQUYtNIVGLTSFRi00hUYtNIV")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_7x2bk")
+shadow_mesh = SubResource("ArrayMesh_wjqqm")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uifq4"]
 points = PackedVector3Array(0, 0, -1, 0, 0.5, 0, 0, 0.5, -0.5000979, 1, 0, -1, 1, 0, 0, 0.49990213, 0.5, 0, 0.37490213, 0.5, -0.37509787)
@@ -159,7 +159,7 @@ resource_name = "rockDark"
 albedo_color = Color(0.8532437, 0.6441637, 0.5494939, 1)
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8nqbg"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uifq4"]
 _surfaces = [{
 "aabb": AABB(-0.5, -7.5139e-33, -0.5, 1, 0.5, 1),
 "format": 34896613377,
@@ -233,7 +233,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("VFX///////8AAP///////wAAAAAAAP//VFUAAAAA//9UVQAAAAAp1v//AAD//ynWVFX/////Kdb/fxrP/38az/9/Gs//fxrP47CsEuOwrBLjsKwS")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_8nqbg")
+shadow_mesh = SubResource("ArrayMesh_uifq4")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o2bja"]
 points = PackedVector3Array(-0.5, -7.5139e-33, -0.5, -9.787083e-05, -7.5139e-33, 0.5, -0.5, 0.5, 0.5, 0.5, -7.5139e-33, -0.5, 0.5, -7.5139e-33, 0.5, 0, 0.5, 0.5)
@@ -241,7 +241,7 @@ points = PackedVector3Array(-0.5, -7.5139e-33, -0.5, -9.787083e-05, -7.5139e-33,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ve3to"]
 points = PackedVector3Array(-0.5, -7.5139e-33, -0.5, -9.787083e-05, -7.5139e-33, 0.5, -0.5, 0.5, 0.5, 0.5, -7.5139e-33, -0.5, 0.5, -7.5139e-33, 0.5, 0, 0.5, 0.5)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1k4eh"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_o2bja"]
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
 "format": 34896613377,
@@ -271,7 +271,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("//8AAP///78AAAAA////vwAAAAAAAP+///8AAAAA/7////9/////f////3////9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_1k4eh")
+shadow_mesh = SubResource("ArrayMesh_o2bja")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cia2k"]
 points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
@@ -281,7 +281,7 @@ resource_name = "rock.005"
 albedo_color = Color(0.9592555, 0.7468624, 0.65628237, 1)
 metallic = 1.0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_0oqex"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ve3to"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.25, -0.5, 1, 0.5, 1),
 "format": 34896613377,
@@ -311,7 +311,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("//////////8AAP///////wAAAAAAAP////8AAAAA////fxrP/38az/9/Gs//fxrP")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_0oqex")
+shadow_mesh = SubResource("ArrayMesh_ve3to")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aj8m4"]
 points = PackedVector3Array(-0.5, -0.25, -0.5, -0.5, 0.25, 0.5, 0.5, -0.25, -0.5, 0.5, 0.25, 0.5)

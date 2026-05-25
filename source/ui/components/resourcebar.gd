@@ -31,4 +31,4 @@ func update_resource(new_res: float):
 # Внутренняя функция для сборки красивой строки текста
 func _update_text(current: float, max_val: float):
 	# Вариант 1: Просто "45 / 50" (форматирование через %d, чтобы убрать знаки после запятой)
-	label.text = "%d / %d" % [current, max_val]
+	label.text = "%d/%d" % [current, max_val]

@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dkdbst817i0hx"]
+
+[ext_resource type="Script" uid="uid://cywd7kbdtd1hp" path="res://source/ui/menu/main-menu.gd" id="1_piw8y"]
+[ext_resource type="Texture2D" uid="uid://ygj6aeowno10" path="res://assets/ui/mars.jpeg" id="2_nk4im"]
+[ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="3_slkp8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2mmed"]
+font = ExtResource("3_slkp8")
+font_size = 72
+
+[node name="Menu" type="CanvasLayer" unique_id=791118656]
+script = ExtResource("1_piw8y")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=681335020]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -38.5
+offset_right = 64.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nk4im")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1805994309]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.29411766)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=382792846]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1411392326]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1392173090]
+layout_mode = 2
+text = "martian"
+label_settings = SubResource("LabelSettings_2mmed")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGame" type="Button" parent="CenterContainer/VBoxContainer" unique_id=818180065]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_slkp8")
+theme_override_font_sizes/font_size = 20
+text = "new game
+"
+
+[node name="LoadSave" type="Button" parent="CenterContainer/VBoxContainer" unique_id=194164329]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_slkp8")
+theme_override_font_sizes/font_size = 20
+text = "load save"
+
+[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer" unique_id=829689684]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_slkp8")
+theme_override_font_sizes/font_size = 20
+text = "exit"
