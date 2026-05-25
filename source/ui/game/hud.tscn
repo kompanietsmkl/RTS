@@ -71,6 +71,7 @@ offset_top = -150.0
 offset_bottom = -110.0
 grow_horizontal = 0
 grow_vertical = 0
+pivot_offset = Vector2(565, 20)
 
 [node name="Heal" parent="." unique_id=449678221 instance=ExtResource("6_gm6lp")]
 anchors_preset = 3

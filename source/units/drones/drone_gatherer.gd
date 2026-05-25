@@ -20,7 +20,7 @@ var harvest_rate: float = 12.5
 var unload_time: float = 2.0
 var unload_timer: float = 0.0
 
-@export var interact_range := 2.0
+@export var interact_range := 1.0
 
 func _enter_tree() -> void:
 	GameManager.total_gatherers += 1

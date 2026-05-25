@@ -1,6 +1,0 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://ct8o5uscpkpj2"]
-
-[ext_resource type="FontFile" uid="uid://ddbkqmwtxg65k" path="res://assets/fonts/Kenney Future Narrow.ttf" id="1_racse"]
-
-[resource]
-font = ExtResource("1_racse")
