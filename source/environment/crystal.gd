@@ -38,7 +38,7 @@ func deplete_and_respawn():
 	remove_from_group("crystals") # Прячем кристалл от радаров дронов!
 	
 	# Запускаем встроенный таймер респавна (sleep time)
-	await get_tree().create_timer(rng.randi_range(30.0, 75.0)).timeout # Ждем 30-75 секунд
+	await get_tree().create_timer(rng.randi_range(20.0, 60.0)).timeout # Ждем 20-60 секунд
 	
 	# Возвращаем кристалл к жизни
 	current_resources = max_resources

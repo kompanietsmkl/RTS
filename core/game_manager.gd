@@ -13,6 +13,7 @@ signal production_progress(id: int, time_left: float, duration: float)
 signal production_completed(id: int)
 signal drone_limit_changed(current, max_limit)
 signal base_destroyed()
+signal wave_started(wave_number: int)
 
 enum AlertType { INFO, SUCCESS, WARNING, ERROR }
 signal show_alert(message: String, type: AlertType)
@@ -167,6 +168,12 @@ func set_energy_production(amount: int) -> bool:
 	return true
 
 # --- ЛОГИКА ЭКОНОМИКИ ---
+
+# Конвертация ресурсов в кредиты с бонусом +50% за каждый уровень базы
+func convert_resources_to_credits(resources: float) -> int:
+	var base_credits = resources / 5.0
+	var multiplier = pow(1.7, base_level - 1)
+	return round(base_credits * multiplier)
 
 # Вызывается, когда дрон приносит кристалл на базу
 func add_credits(amount: int):

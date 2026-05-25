@@ -7,4 +7,4 @@ script = ExtResource("1_bd")
 building_id = "commandcenter"
 display_name = "Base"
 level_costs = Array[int]([0, 150, 300])
-level_healths = Array[float]([500.0, 750.0, 1000.0])
+level_healths = Array[float]([600.0, 800.0, 1100.0])

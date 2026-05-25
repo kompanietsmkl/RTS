@@ -25,6 +25,8 @@ SoundManager="*res://core/sound_manager.gd"
 
 [display]
 
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://dyw62e36t5pwf"
 
 [navigation]

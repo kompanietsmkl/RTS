@@ -31,6 +31,9 @@ func _ready() -> void:
 	find_target()
 
 func _physics_process(delta: float) -> void:
+	# Constant rotation around its own axis (360 degrees in 30 seconds)
+	rotate_y((TAU / 30.0) * delta)
+	
 	# Levitation effect (since it's a hovering/levitating catalyst)
 	time_passed += delta
 	var levitation = sin(time_passed * 2.0) * 0.15
@@ -45,13 +48,7 @@ func _physics_process(delta: float) -> void:
 			return
 			
 	var distance_to_target = global_position.distance_to(target.global_position)
-	
-	# Look at target
-	var look_pos = target.global_position
-	look_pos.y = global_position.y
-	if global_position.distance_to(look_pos) > 0.1:
-		look_at(look_pos, Vector3.UP)
-		
+			
 	# Combat cooldown
 	time_since_last_attack += delta
 	

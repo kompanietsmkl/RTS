@@ -9,6 +9,7 @@ var time_to_next_wave: float = 60.0
 var warning_shown: bool = false
 var previous_wave_size: int = 0
 
+
 # Координаты спавнов по диагонали (для карты 60x60)
 var spawn_points: Array[Vector3] = [
 	Vector3(-25, 0, 25),
@@ -29,12 +30,12 @@ func _process(delta: float) -> void:
 	if wave_timer >= time_to_next_wave:
 		spawn_wave()
 		wave_timer = 0.0
-		time_to_next_wave = 45.0 # Последующие волны идут каждые 45 секунд
+		time_to_next_wave = 45.0 
 		warning_shown = false
 
 func spawn_wave() -> void:
 	wave_number += 1
-	var base_amount = 5 + (wave_number - 1) * 2
+	var base_amount = 5
 	
 	var total_defenders = GameManager.total_defenders
 	var base_level = GameManager.base_level
@@ -45,7 +46,7 @@ func spawn_wave() -> void:
 		factory_level = factories[0].current_level
 		
 	# Эвристическая формула усложнения
-	var bonus = int(total_defenders / 3.0) + (base_level * 2) + (factory_level * 1)
+	var bonus = int(total_defenders / 3.0) + base_level + factory_level
 	var total_mobs = base_amount + bonus
 	
 	# Гарантируем, что волна всегда больше предыдущей
@@ -60,6 +61,7 @@ func spawn_wave() -> void:
 		catalyst_count = max(1, int(total_mobs * 0.2))
 	
 	GameManager.show_alert.emit("Wave " + str(wave_number) + " has arrived! (" + str(total_mobs) + " aliens)", GameManager.AlertType.ERROR)
+	GameManager.wave_started.emit(wave_number)
 	
 	for i in range(total_mobs):
 		var alien_instance = null
