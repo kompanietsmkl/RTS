@@ -9,12 +9,13 @@
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1284809205]
 script = ExtResource("1_hud_script")
 metadata/_edit_horizontal_guides_ = [15.0]
+metadata/_edit_vertical_guides_ = [133.0, 151.0]
 
 [node name="EnergyPanel" parent="." unique_id=1135170803 instance=ExtResource("1_5v2im")]
 offset_left = 15.0
-offset_top = 60.0
+offset_top = 75.0
 offset_right = -937.0
-offset_bottom = -496.0
+offset_bottom = -480.99997
 
 [node name="Credits" parent="." unique_id=765612719 instance=ExtResource("2_1nkv2")]
 offset_left = 15.0
@@ -38,13 +39,13 @@ pivot_offset = Vector2(78, 40)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_bottom = 0.0
-offset_left = -160.0
+offset_left = -212.0
 offset_top = 15.0
-offset_right = -160.0
-offset_bottom = 15.0
+offset_right = -15.0
+offset_bottom = 61.0
 grow_horizontal = 0
 grow_vertical = 1
-pivot_offset = Vector2(75, 15)
+pivot_offset = Vector2(100, 23)
 
 [node name="AlertsContainer" type="VBoxContainer" parent="." unique_id=5555555]
 anchors_preset = 5

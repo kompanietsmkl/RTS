@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ciqkgqi8n5hru"]
 
 [ext_resource type="Script" uid="uid://brcfujkuum1io" path="res://source/ui/components/energypanel.gd" id="1_pglqc"]
-[ext_resource type="Texture2D" uid="uid://du0t7r60vta5b" path="res://assets/textures/ui-pack/panel_rectangle.png" id="2_e3qi0"]
 [ext_resource type="LabelSettings" uid="uid://d0rx8mqh45rrs" path="res://assets/fonts/Auire/aquire_label_settings.tres" id="3_e3qi0"]
 [ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="4_e3qi0"]
 [ext_resource type="LabelSettings" uid="uid://dtayibgbqnhxq" path="res://assets/fonts/Auire/medium_aquire_label_settings.tres" id="5_lumq2"]
@@ -20,102 +19,106 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pglqc")
 
-[node name="Box" type="NinePatchRect" parent="." unique_id=1711242726]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=894355527]
 layout_mode = 0
-offset_right = 210.0
-offset_bottom = 110.0
-texture = ExtResource("2_e3qi0")
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Box" unique_id=1273574252]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -94.0
-offset_top = -52.5
-offset_right = 94.0
-offset_bottom = 55.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Header" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=1527761917]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1214815355]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Box/VBoxContainer/Header" unique_id=1251075457]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=721132797]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=523034358]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=58815833]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=2025093529]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "ENERGY:"
 label_settings = ExtResource("3_e3qi0")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnergyLabel" type="Label" parent="Box/VBoxContainer/Header" unique_id=1435535177]
+[node name="EnergyLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=1278685326]
 layout_mode = 2
 text = "5/5"
 label_settings = SubResource("LabelSettings_6eclu")
 
-[node name="Spacer" type="Control" parent="Box/VBoxContainer" unique_id=1075989723]
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1615125288]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 
-[node name="DefendRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=1290730499]
+[node name="DefendRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=439860360]
 layout_mode = 2
 
-[node name="DefendTitle" type="Label" parent="Box/VBoxContainer/DefendRow" unique_id=1370810727]
+[node name="DefendTitle" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DefendRow" unique_id=1681567237]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "defend"
 label_settings = ExtResource("5_lumq2")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DefendValue" type="Label" parent="Box/VBoxContainer/DefendRow" unique_id=1130077879]
+[node name="DefendValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DefendRow" unique_id=1546211369]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_lumq2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DefendSlider" type="HSlider" parent="Box/VBoxContainer/DefendRow" unique_id=1993131566]
+[node name="DefendSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DefendRow" unique_id=2123614728]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GatherRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=807806922]
+[node name="GatherRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2126044713]
 layout_mode = 2
 
-[node name="GatherTitle" type="Label" parent="Box/VBoxContainer/GatherRow" unique_id=1230519127]
+[node name="GatherTitle" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GatherRow" unique_id=53780267]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Gather"
 label_settings = ExtResource("5_lumq2")
 vertical_alignment = 1
 
-[node name="GatherValue" type="Label" parent="Box/VBoxContainer/GatherRow" unique_id=236617404]
+[node name="GatherValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GatherRow" unique_id=1754122488]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_lumq2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GatherSlider" type="HSlider" parent="Box/VBoxContainer/GatherRow" unique_id=1371882708]
+[node name="GatherSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GatherRow" unique_id=1096608356]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ProductionRow" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=242067831]
+[node name="ProductionRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=915254505]
 layout_mode = 2
 
-[node name="ProductionTitle" type="Label" parent="Box/VBoxContainer/ProductionRow" unique_id=448607630]
+[node name="ProductionTitle" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ProductionRow" unique_id=754512056]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Product"
 label_settings = ExtResource("5_lumq2")
 vertical_alignment = 1
 
-[node name="ProductionValue" type="Label" parent="Box/VBoxContainer/ProductionRow" unique_id=2009971968]
+[node name="ProductionValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ProductionRow" unique_id=1708748581]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_lumq2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProductionSlider" type="HSlider" parent="Box/VBoxContainer/ProductionRow" unique_id=1104317432]
+[node name="ProductionSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ProductionRow" unique_id=74497992]
 layout_mode = 2
 size_flags_horizontal = 3

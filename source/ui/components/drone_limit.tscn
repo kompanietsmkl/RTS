@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://ba7rpdwiy26fd"]
 
-[ext_resource type="Texture2D" uid="uid://du0t7r60vta5b" path="res://assets/textures/ui-pack/panel_rectangle.png" id="1_q4088"]
 [ext_resource type="Script" uid="uid://ckwivt52eogyl" path="res://source/ui/components/drone_limit.gd" id="1_wh1kk"]
 [ext_resource type="LabelSettings" uid="uid://d0rx8mqh45rrs" path="res://assets/fonts/Auire/aquire_label_settings.tres" id="2_wh1kk"]
 [ext_resource type="FontFile" uid="uid://bqgvec373jrx2" path="res://assets/fonts/Auire/AquireBold.otf" id="3_m6lsm"]
@@ -19,35 +18,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wh1kk")
 
-[node name="Box" type="NinePatchRect" parent="." unique_id=824980611]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1382168814]
 layout_mode = 0
-offset_right = 148.0
-offset_bottom = 30.0
-texture = ExtResource("1_q4088")
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Box" unique_id=128757636]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.0
-offset_top = -16.0
-offset_right = 68.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Header" type="HBoxContainer" parent="Box/VBoxContainer" unique_id=1685671675]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1068332944]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Box/VBoxContainer/Header" unique_id=1701511299]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=748052212]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=1456480416]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=442193343]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=951738927]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "drones:"
 label_settings = ExtResource("2_wh1kk")
 
-[node name="DroneLabel" type="Label" parent="Box/VBoxContainer/Header" unique_id=1339655254]
+[node name="DroneLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=1812579482]
 layout_mode = 2
 text = "X/X"
 label_settings = SubResource("LabelSettings_ps1nn")

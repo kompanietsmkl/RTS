@@ -1,12 +1,12 @@
 extends Control
 
-@onready var energy_label = $Box/VBoxContainer/Header/EnergyLabel
-@onready var slider_gather = $Box/VBoxContainer/GatherRow/GatherSlider
-@onready var label_gather = $Box/VBoxContainer/GatherRow/GatherValue
-@onready var slider_defend = $Box/VBoxContainer/DefendRow/DefendSlider
-@onready var label_defend = $Box/VBoxContainer/DefendRow/DefendValue
-@onready var slider_prod = $Box/VBoxContainer/ProductionRow/ProductionSlider
-@onready var label_prod = $Box/VBoxContainer/ProductionRow/ProductionValue
+@onready var energy_label = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Header/EnergyLabel
+@onready var slider_gather = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GatherRow/GatherSlider
+@onready var label_gather = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GatherRow/GatherValue
+@onready var slider_defend = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DefendRow/DefendSlider
+@onready var label_defend = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DefendRow/DefendValue
+@onready var slider_prod = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ProductionRow/ProductionSlider
+@onready var label_prod = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ProductionRow/ProductionValue
 
 func _ready():
 	# Подписываемся на сигналы
