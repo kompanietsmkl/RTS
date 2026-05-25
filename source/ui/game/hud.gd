@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var alerts_container: VBoxContainer = $AlertsContainer
 var production_ui_items: Dictionary = {}
 var heal_cost: int = 50
+var cheat_buffer: String = ""
 const QueueElementScene = preload("res://source/ui/components/productionqueueelement.tscn")
 const AlertScene = preload("res://source/ui/components/alert_message.tscn")
 
@@ -17,32 +18,21 @@ func _ready() -> void:
 	if $Heal:
 		$Heal.pressed.connect(_on_heal_pressed)
 		_update_heal_cost(0)
-		
-	_create_god_mode_button()
 
-func _create_god_mode_button():
-	var btn = Button.new()
-	btn.text = "GOD MODE (+10k)"
-	btn.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	btn.anchor_left = 1.0
-	btn.anchor_right = 1.0
-	btn.anchor_bottom = 1.0
-	btn.anchor_top = 1.0
-	
-	btn.offset_right = -20.0
-	btn.offset_left = -180.0
-	btn.offset_bottom = -20.0
-	btn.offset_top = -60.0
-	
-	btn.add_theme_font_size_override("font_size", 16)
-	btn.add_theme_color_override("font_color", Color.GOLD)
-	
-	btn.pressed.connect(_on_god_mode_pressed)
-	add_child(btn)
-
-func _on_god_mode_pressed():
-	GameManager.add_credits(10000)
-	GameManager.show_alert.emit("God mode activated! +10000 credits", GameManager.AlertType.SUCCESS)
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		# Convert keycode to string, assuming letters
+		var key_str = OS.get_keycode_string(event.physical_keycode).to_upper()
+		if key_str.length() == 1:
+			cheat_buffer += key_str
+			if cheat_buffer.length() > 10:
+				cheat_buffer = cheat_buffer.substr(cheat_buffer.length() - 10)
+				
+			if cheat_buffer.ends_with("NNNHHH"):
+				cheat_buffer = "" # clear buffer
+				GameManager.add_credits(10000)
+				GameManager.show_alert.emit("CHEAT ACTIVATED: +10000 credits", GameManager.AlertType.SUCCESS)
+				SoundManager.play_sfx("production") # Optional feedback
 
 func _on_wave_started(wave_number: int):
 	_update_heal_cost(wave_number)
